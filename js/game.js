@@ -10,15 +10,23 @@ function init(){
 }
 
 
-// ???? 
-function mute() {
+// Mute and unmute background sound
+function soundOff() {
     if (!world.character.mute) {
+    document.getElementById("mute").classList.add('d-none');
+    document.getElementById("unmute").classList.remove('d-none');
     world.character.mute = true;
     } 
-    else {
-    world.character.mute = false;
-    } 
 }
+
+function soundOn() {
+    if (world.character.mute) {
+    document.getElementById("mute").classList.remove('d-none');
+    document.getElementById("unmute").classList.add('d-none');
+    world.character.mute = false;
+    }   
+} 
+
 
 // Taste drücken
 window.addEventListener('keydown', (e) => {
