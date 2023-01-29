@@ -3,6 +3,9 @@ class Chicken extends MovableObject { // mit extends werden Eigenschaften einer 
     height = 75;
     width = 65;
     y =345;
+
+    mute = false;
+
     IMAGES_WALKING = [
         './img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         './img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',

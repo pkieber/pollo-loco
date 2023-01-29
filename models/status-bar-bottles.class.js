@@ -11,6 +11,7 @@ class StatusBarBottles extends DrawableObject { // see World.class.js !!
 
     percentage = 100;
 
+
     constructor(){
         super(); // Methoden von übergeordneten Objekt initialisieren. 
         this.loadImages(this.IMAGES); 

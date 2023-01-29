@@ -4,7 +4,7 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
     width = 120;
     y = 130;
     speed = 10;
-    //
+    
     mute = false;
 
     IMAGES_WALKING = [
@@ -86,8 +86,7 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
 
         setInterval(() => {
             this.walking_sound.pause();
-            // if (!this.mute) this.background_sound.play();  
-
+            if (!this.mute) this.background_sound.play();  
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){ // Grenze am rechten Ende.
                 this.moveRight();
