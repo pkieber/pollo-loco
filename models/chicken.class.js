@@ -21,7 +21,7 @@ class Chicken extends MovableObject { // mit extends werden Eigenschaften einer 
         super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING); 
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 200 + Math.random() * 500; // Zufälliges Platzieren auf der x-Achse. Zahl zwischen 200 und 700
+        this.x = 400 + Math.random() * 500; // Zufälliges Platzieren auf der x-Achse. Zahl zwischen 200 und 700
         this.speed = 0.15 + Math.random() * 0.25; // Min. Speed = 0.15 + random speed zwischen 0 + 0.25
 
         this.animate();
