@@ -3,8 +3,8 @@ class CollectibleBottle extends MovableObject {
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
-    height = 120;
-    width = 120;
+    height = 60;
+    width = 50;
     
     constructor(x, y) {
         super();
