@@ -27,6 +27,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollisionWithBottles();
+            this.checkCollisionWithCoins(); 
             this.checkThrownObjects();
         }, 200);
     }
@@ -49,6 +51,31 @@ class World {
             }
         });
     }
+
+
+    // Collecting bottles and coins
+    checkCollisionWithBottles() {
+        this.level.collectibleBottles.forEach((collectibleBottles) => {
+            if (this.character.isColliding(collectibleBottles)) {
+            // if (!this.character.mute) this.character.audio_collectBottle.play();
+            this.character.collectibleBottles++;
+            this.statusBarBottles.setPercentage(this.character.collectibleBottles);
+            this.level.collectibleBottles.splice(this.level.collectibleBottles.indexOf(collectibleBottles), 1);
+            }
+        });
+    }
+    
+    checkCollisionWithCoins() {
+        this.level.collectibleCoins.forEach((collectibleCoins) => {
+            if (this.character.isColliding(collectibleCoins)) {
+            // if (!this.character.mute) this.character.audio_collectBottle.play();
+            this.character.collectibleCoins++;
+            this.statusBarCoins.setPercentage(this.character.collectibleCoins);
+            this.level.collectibleCoins.splice(this.level.collectibleCoins.indexOf(collectibleCoins), 1);
+            }
+        });
+    }
+
 
     // Welt gemalt und zuerst wieder gelöscht (clearRect) und Charakter, Ememies, Clouds, etc. werden wieder hinzugefügt. 
     draw(){
@@ -93,10 +120,8 @@ class World {
         if (mo.otherDirection){ 
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
-
         if (mo.otherDirection){ // Falls Context oben verändert, dann restore.
             this.flipImageBack(mo);
         }

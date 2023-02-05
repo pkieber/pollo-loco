@@ -17,16 +17,18 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    
     drawFrame(ctx) {
         // Canvas draw rectangle
         if(this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
             ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
+            // ctx.lineWidth = '5';
+            // ctx.strokeStyle = 'rgba(0,0,0,0)'; // Hilfsrahmen
             ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
+            // ctx.stroke();
         }
     }
+    
 
     /**
      * 

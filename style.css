@@ -25,12 +25,38 @@ canvas {
     display: block;
 }
 
+.start-screen {
+    position: absolute;
+    top: 0;
+}
+
+.start-img {
+    height: 480px;
+    width: 720px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    position: absolute;
+    bottom: 0;
+    width: 720px;
+}
+
 button {
     cursor: pointer;
     border: none;
     margin: 5px;
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color: rgb(246, 206, 73);
+}
+
+button:hover {
+    background-color: rgb(249, 189, 0);
 }
 
 .d-none{

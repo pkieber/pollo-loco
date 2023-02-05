@@ -91,18 +91,18 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){ // Grenze am rechten Ende.
                 this.moveRight();
                 this.otherDirection = false;
-                if (!this.mute) this.walking_sound.play(); // ?
+                if (!this.mute) this.walking_sound.play(); 
             }
 
             if(this.world.keyboard.LEFT && this.x > 0){ // Charakter kann links nicht aus dem Bild laufen. 
                 this.moveLeft();
                 this.otherDirection = true;
-                if (!this.mute) this.walking_sound.play(); // ?
+                if (!this.mute) this.walking_sound.play();
             }
 
             if(this.world.keyboard.SPACE && !this.isAboveGround()){ // Keyboard SPACE and NOT above ground...
                 this.jump();
-                if (!this.mute) this.jumping_sound.play(); // ? 
+                if (!this.mute) this.jumping_sound.play();
             }
 
             this.world.camera_x = -this.x + 100; // + 100 damit Charakter nicht am Rand klebt.
@@ -111,11 +111,11 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
         setInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
             if (this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
-                if (!this.mute) this.death_sound.play(); // ?
+                if (!this.mute) this.death_sound.play();
 
             } else if (this.isHurt()){ 
                     this.playAnimation(this.IMAGES_HURT);
-                    if (!this.mute) this.pain_sound.play(); // ?
+                    if (!this.mute) this.pain_sound.play();
 
             } else if (this.isAboveGround()){ 
                     this.playAnimation(this.IMAGES_JUMPING);
