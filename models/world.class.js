@@ -20,9 +20,11 @@ class World {
         this.run();
     }
 
+
     setWorld(){
         this.character.world = this;
     }
+
 
     run() {
         setInterval(() => {
@@ -33,6 +35,7 @@ class World {
         }, 200);
     }
 
+    
     checkThrownObjects() {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -53,25 +56,27 @@ class World {
     }
 
 
-    // Collecting bottles and coins
+    // Collecting Bottles (remove bottles after collision)
     checkCollisionWithBottles() {
-        this.level.collectibleBottles.forEach((collectibleBottles) => {
-            if (this.character.isColliding(collectibleBottles)) {
-            // if (!this.character.mute) this.character.audio_collectBottle.play();
-            this.character.collectibleBottles++;
-            this.statusBarBottles.setPercentage(this.character.collectibleBottles);
-            this.level.collectibleBottles.splice(this.level.collectibleBottles.indexOf(collectibleBottles), 1);
+        this.level.collectibleBottles.forEach ((collectibleBottles) => {
+            if(this.character.isColliding(collectibleBottles)) {
+                this.character.collectBottle();
+                this.statusBarBottles.setPercentage(this.character.bottle);
+                //console.log('Collected BOTTLES ', this.character.bottle);
+                this.level.collectibleBottles.splice(this.level.collectibleBottles.indexOf(collectibleBottles), 1);
             }
         });
     }
-    
+
+
+    // Collecting Coins (remove bottles after collision)
     checkCollisionWithCoins() {
-        this.level.collectibleCoins.forEach((collectibleCoins) => {
-            if (this.character.isColliding(collectibleCoins)) {
-            // if (!this.character.mute) this.character.audio_collectBottle.play();
-            this.character.collectibleCoins++;
-            this.statusBarCoins.setPercentage(this.character.collectibleCoins);
-            this.level.collectibleCoins.splice(this.level.collectibleCoins.indexOf(collectibleCoins), 1);
+        this.level.collectibleCoins.forEach ((collectibleCoins) => {
+            if(this.character.isColliding(collectibleCoins)) {
+                this.character.collectCoin();
+                this.statusBarCoins.setPercentage(this.character.coin);
+                //console.log('Collected COINS ', this.character.coin);
+                this.level.collectibleCoins.splice(this.level.collectibleCoins.indexOf(collectibleCoins), 1);
             }
         });
     }
@@ -80,29 +85,22 @@ class World {
     // Welt gemalt und zuerst wieder gelöscht (clearRect) und Charakter, Ememies, Clouds, etc. werden wieder hinzugefügt. 
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-        
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed objects --------
         this.addToMap(this.statusBar);   
         this.addToMap(this.statusBarBottles);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarEndboss); // Only show when near endboss ?? 
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.collectibleCoins); // ?
         this.addObjectsToMap(this.level.collectibleBottles);// ?
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-
         this.ctx.translate(-this.camera_x, 0); //
-
-
         // Draw() wird immer wieder aufgerufen. 
         let self = this;
         requestAnimationFrame(function(){
@@ -110,11 +108,13 @@ class World {
         });
     } 
 
+
     addObjectsToMap(objects){
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
+
 
     addToMap(mo) { // mo = movable Object
         if (mo.otherDirection){ 
@@ -127,12 +127,14 @@ class World {
         }
     }
 
+
     flipImage(mo){
         this.ctx.save(); // Falls andere Richtung, dann Context-Stand speichern
         this.ctx.translate(mo.width, 0); // .. verursacht das Verschieben.
         this.ctx.scale(-1,1); // .. verursacht das Spiegeln.
         mo.x = mo.x *-1; // .. x-Koordinate spiegeln. 
     }
+
 
     flipImageBack(mo){
         mo.x = mo.x *-1;

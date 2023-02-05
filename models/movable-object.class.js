@@ -3,6 +3,8 @@ class MovableObject extends DrawableObject{
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    coin = 0; // coin counter
+    bottle = 0; // bottle counter
     energy = 100;
     energyLoss = 2; 
     lastHit = 0;
@@ -42,6 +44,27 @@ class MovableObject extends DrawableObject{
             this.lastHit = new Date().getTime();
         }
     }
+
+
+    collectCoin() {
+        this.coin += 1;
+        if (this.coin <= 0) {
+            this.coin = 0;
+        } else {
+            this.lastCoinHit = new Date().getTime();
+        }
+    }
+
+
+    collectBottle() {
+        this.bottle += 1;
+        if (this.bottle <= 0) {
+            this.bottle = 0;
+        } else {
+            this.lastBottleHit = new Date().getTime();
+        }
+    }
+
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
