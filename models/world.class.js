@@ -1,5 +1,6 @@
 class World {
     character = new Character(); // let character
+    endboss = new Endboss(); // let endboss
     level = level1;
     canvas;
     ctx;
@@ -10,6 +11,7 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
+
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
@@ -32,10 +34,11 @@ class World {
             this.checkCollisionWithBottles();
             this.checkCollisionWithCoins(); 
             this.checkThrownObjects();
+            this.checkIfEndbossHitByBottle();
         }, 200);
     }
 
-    
+
     checkThrownObjects() {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -47,7 +50,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach ((enemy) => {
-            if(this.character.isColliding(enemy)) {
+            if(this.character.isColliding(enemy) && !this.character.isAboveGround()) { 
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 //console.log('Collision with Character, energy ', this.character.energy);
@@ -56,7 +59,7 @@ class World {
     }
 
 
-    // Collecting Bottles (remove bottles after collision)
+    // Check if character and bottles are colliding (> collect bottles).
     checkCollisionWithBottles() {
         this.level.collectibleBottles.forEach ((collectibleBottles) => {
             if(this.character.isColliding(collectibleBottles)) {
@@ -69,7 +72,7 @@ class World {
     }
 
 
-    // Collecting Coins (remove bottles after collision)
+    // Check if character and coins are colliding (> collect coins).
     checkCollisionWithCoins() {
         this.level.collectibleCoins.forEach ((collectibleCoins) => {
             if(this.character.isColliding(collectibleCoins)) {
@@ -80,6 +83,18 @@ class World {
             }
         });
     }
+
+
+    // Check if throwableObject and enboss are colliding. 
+    checkIfEndbossHitByBottle () {
+        this.throwableObjects.forEach ((throwableObject) => {
+            if(this.endboss.isColliding(throwableObject)) {
+            this.endboss.bottleHitEndboss();
+            this.statusBarEndboss.setPercentage(this.endboss.bossEnergy); // ENERGIE WIRD KOMPLETT ABEZOGEN
+            //console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
+            } 
+        }); 
+    } 
 
 
     // Welt gemalt und zuerst wieder gelöscht (clearRect) und Charakter, Ememies, Clouds, etc. werden wieder hinzugefügt. 

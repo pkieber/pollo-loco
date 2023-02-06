@@ -7,6 +7,8 @@ class MovableObject extends DrawableObject{
     bottle = 0; // bottle counter
     energy = 100;
     energyLoss = 2; 
+    bossEnergy = 100;
+    bossEnergyLoss = 12.5;
     lastHit = 0;
     offsetY = 100;
     offsetX = 0;
@@ -36,6 +38,8 @@ class MovableObject extends DrawableObject{
                 //mo.onCollisionCourse;
     }
 
+
+    // Character loses energy (hit by enemies).
     hit() {
         this.energy -=this.energyLoss;
         if(this.energy <=  0) {
@@ -46,6 +50,18 @@ class MovableObject extends DrawableObject{
     }
 
 
+    // Endboss loses energy (hit by character's bottle).
+    bottleHitEndboss() {
+        this.bossEnergy -= this.bossEnergyLoss;
+        if(this.bossEnergy <=  0) {
+            this.bossEnergy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+
+    // Coins are being collected by character.
     collectCoin() {
         this.coin += 1;
         if (this.coin <= 0) {
@@ -56,6 +72,7 @@ class MovableObject extends DrawableObject{
     }
 
 
+    // Bottles are being collected by character.
     collectBottle() {
         this.bottle += 1;
         if (this.bottle <= 0) {
