@@ -1,11 +1,11 @@
 class World {
-    character = new Character(); // let character
-    endboss = new Endboss(); // let endboss
+    character = new Character();
+    endboss = new Endboss(); 
     level = level1;
     canvas;
     ctx;
     keyboard;
-    camera_x = 0; // Camera startet bei 0 und läuft mit Character mit. 
+    camera_x = 0; // Camera starts at position 0 on the x-axis (and moves with the character).
     statusBar = new StatusBarCharacter();
     statusBarEndboss = new statusBarEndboss();
     statusBarCoins = new StatusBarCoins();
@@ -31,14 +31,17 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollisionWithEndboss()
             this.checkCollisionWithBottles();
             this.checkCollisionWithCoins(); 
             this.checkThrownObjects();
             this.checkIfEndbossHitByBottle();
+            this.checkJumpOnEnemy();
         }, 200);
     }
 
 
+    // If bottles are thrown, push them into the array.
     checkThrownObjects() {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -48,6 +51,7 @@ class World {
     }
 
 
+    // Check if character and enemies are colliding (> hit enemies).
     checkCollisions() {
         this.level.enemies.forEach ((enemy) => {
             if(this.character.isColliding(enemy) && !this.character.isAboveGround()) { 
@@ -57,6 +61,15 @@ class World {
             }
         });
     }
+
+
+    checkCollisionWithEndboss() {
+        if (this.character.isColliding(this.endboss)) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
+
 
 
     // Check if character and bottles are colliding (> collect bottles).
@@ -91,13 +104,42 @@ class World {
             if(this.endboss.isColliding(throwableObject)) {
             this.endboss.bottleHitEndboss();
             this.statusBarEndboss.setPercentage(this.endboss.bossEnergy); // ENERGIE WIRD KOMPLETT ABEZOGEN
-            //console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
+            console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
             } 
         }); 
     } 
 
 
-    // Welt gemalt und zuerst wieder gelöscht (clearRect) und Charakter, Ememies, Clouds, etc. werden wieder hinzugefügt. 
+    // Check if character and chicken/small chicken are colliding from above (> jump on chicken).
+    checkJumpOnEnemy() {
+        for (let i = 0; i < this.level.enemies.length; i++) {
+            const enemy = this.level.enemies[i];
+            if (
+                this.character.isColliding(enemy) &&
+                this.character.isAboveGround()
+            ) {
+            let crushedChicken = this.level.enemies.indexOf(enemy);
+            //if (!this.level.enemies[hittedChicken].hitted && !this.character.mute)
+            //this.level.enemies[hittedChicken].audio_hitted.play();
+            this.level.enemies[crushedChicken].hitted = true;
+            console.log("CHICKEN CRUSHED", crushedChicken);
+            this.removeEnemy(enemy);
+            }
+        }
+    }
+
+
+    // Remove enemy from array after 3 seconds when character jumps on it.
+    removeEnemy(enemy) {
+        setTimeout(() => {
+        this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+        }, 3000);
+    }
+
+
+    // draw() is used to draw the world and all objects in it like character, enemies, clouds, etc.
+    // ctx.clear() is used to clear the canvas before drawing the next frame.
+    // ctx.translate() is used to move the camera with the character on the x-axis.
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -107,16 +149,17 @@ class World {
         this.addToMap(this.statusBar);   
         this.addToMap(this.statusBarBottles);
         this.addToMap(this.statusBarCoins);
-        this.addToMap(this.statusBarEndboss); // Only show when near endboss ?? 
+        this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.collectibleCoins); // ?
         this.addObjectsToMap(this.level.collectibleBottles);// ?
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0); //
-        // Draw() wird immer wieder aufgerufen. 
+        // Draw() is called again with requestAnimationFrame() to draw the next frame.
         let self = this;
         requestAnimationFrame(function(){
             self.draw();
@@ -124,6 +167,7 @@ class World {
     } 
 
 
+    // Add objects to map.
     addObjectsToMap(objects){
         objects.forEach(o => {
             this.addToMap(o);
@@ -131,23 +175,27 @@ class World {
     }
 
 
-    addToMap(mo) { // mo = movable Object
+    // Add movable objects to map and flip image if needed.
+    addToMap(mo) { 
         if (mo.otherDirection){ 
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
-        if (mo.otherDirection){ // Falls Context oben verändert, dann restore.
+        if (mo.otherDirection){
             this.flipImageBack(mo);
         }
     }
 
 
+    // Flip image horizontally (for left/right movement). 
+    // ctx.save() and ctx.restore() are used to save and restore the context if image is flipped.
+    // ctx.thanslate() is used to move the context and ctx.scale() is used to flip the context on the x-axis.
     flipImage(mo){
-        this.ctx.save(); // Falls andere Richtung, dann Context-Stand speichern
-        this.ctx.translate(mo.width, 0); // .. verursacht das Verschieben.
-        this.ctx.scale(-1,1); // .. verursacht das Spiegeln.
-        mo.x = mo.x *-1; // .. x-Koordinate spiegeln. 
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1,1);
+        mo.x = mo.x *-1; 
     }
 
 

@@ -8,7 +8,7 @@ class statusBarEndboss extends DrawableObject {
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/100.png', // 5 = Full Energy
     ];
 
-    percentage = 3;
+    percentage = 100;
 
     constructor(){
         super(); // Methoden von übergeordneten Objekt initialisieren. 
@@ -17,7 +17,7 @@ class statusBarEndboss extends DrawableObject {
         this.y = 0; // 50 ?
         this.width = 180; // 200
         this.height = 50; // 60
-        this.setPercentage(3);                       
+        this.setPercentage(100);                       
     }
 
     setPercentage(percentage) {

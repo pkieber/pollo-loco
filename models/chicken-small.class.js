@@ -7,6 +7,7 @@ class SmallChicken extends MovableObject { // mit extends werden Eigenschaften e
     //energyLoss = 100; 
 
     mute = false;
+    hitted = false;
 
     IMAGES_WALKING = [
         './img/3_enemies_chicken/chicken_small/1_walk/1_w.png', 
@@ -29,6 +30,7 @@ class SmallChicken extends MovableObject { // mit extends werden Eigenschaften e
         this.animate();
     }
 
+    
     animate(){
         setInterval(() => {
             this.moveLeft();
@@ -36,7 +38,11 @@ class SmallChicken extends MovableObject { // mit extends werden Eigenschaften e
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+            if (!this.hitted) this.playAnimation(this.IMAGES_WALKING);
+            else {
+                this.playAnimation(this.IMAGES_DEAD);
+                this.speed = 0;
+            }        
         }, 200);
     }
 }
