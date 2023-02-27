@@ -3,6 +3,10 @@ class Endboss extends MovableObject {
     height = 400;
     width = 340;
     y = 50;
+    isBossHit = false;
+    bossEnergy = 100;
+    bossEnergyLoss = 12.5;
+    lastBossHit = 0;
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/1_walk/G1.png', 
@@ -45,15 +49,36 @@ class Endboss extends MovableObject {
 
 
     constructor(){
-        super().loadImage(this.IMAGES_WALKING[0]); // 1. Bild laden 
+        super().loadImage(this.IMAGES_WALKING[0]); // Preload first image. 
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);           
         this.loadImages(this.IMAGES_DEAD); 
         this.x = 2600; 
+        this.bottleHitEndboss();
+        this.isHurt();
         this.animate();            
     }
+
+    
+    // Endboss loses energy (hit by character's bottle).
+    bottleHitEndboss() {
+        this.bossEnergy -= this.bossEnergyLoss;
+        if(this.bossEnergy <=  0) {
+            this.bossEnergy = 0;
+        } else {
+            this.lastBossHit = new Date().getTime();
+        }
+    }
+
+
+    isBossHurt() {
+        let timepassed = new Date().getTime() - this.lastBossHit; // Difference in ms
+        timepassed = timepassed / 1000; // Difference in seconds 
+        return timepassed < 0.5;
+    }
+
 
     animate(){
         setInterval(() => {
@@ -62,25 +87,21 @@ class Endboss extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+            console.log('Boss is dead: ', this.bossEnergy == 0, 'Boss is hurt ', this.isBossHurt());
+            if (this.bossEnergy == 0){
+                this.playAnimation(this.IMAGES_DEAD);
+                //this.death_sound.play();
+        
+            } else if (this.isBossHurt()){ 
+                this.playAnimation(this.IMAGES_HURT);
+                // this.pain_sound.play();
+        
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 200);
     }
 }
 
-/*
-setInterval(() => {
-    if (this.isDead()){
-        this.playAnimation(this.IMAGES_DEAD);
-        //this.death_sound.play();
 
-    } else if (this.isHurt()){ 
-        this.playAnimation(this.IMAGES_HURT);
-        // this.pain_sound.play();
 
-    } else {
-        if (this.moveLeft()){
-            this.playAnimation(this.IMAGES_WALKING);
-        }
-    }
-}, 200);
- */

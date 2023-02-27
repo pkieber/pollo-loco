@@ -7,8 +7,6 @@ class MovableObject extends DrawableObject{
     bottle = 0; // bottle counter
     energy = 100;
     energyLoss = 2; 
-    bossEnergy = 100;
-    bossEnergyLoss = 12.5;
     lastHit = 0;
     offsetY = 100;
     offsetX = 0;
@@ -50,17 +48,6 @@ class MovableObject extends DrawableObject{
     }
 
 
-    // Endboss loses energy (hit by character's bottle).
-    bottleHitEndboss() {
-        this.bossEnergy -= this.bossEnergyLoss;
-        if(this.bossEnergy <=  0) {
-            this.bossEnergy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
-
-
     // Coins are being collected by character.
     collectCoin() {
         this.coin += 1;
@@ -89,9 +76,11 @@ class MovableObject extends DrawableObject{
         return timepassed < 0.5;
     }
 
+    
     isDead() {
         return this.energy == 0;
     }
+
 
     playAnimation(images) {
         let i = this.currentImage % images.length; // let i = 0 % 6; // see remainder operator // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0 ...

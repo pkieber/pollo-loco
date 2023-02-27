@@ -5,7 +5,7 @@ class Chicken extends MovableObject { // mit extends werden Eigenschaften einer 
     y =345;
 
     mute = false;
-    hitted = false;
+    isHit = false;
 
     IMAGES_WALKING = [
         './img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -36,7 +36,7 @@ class Chicken extends MovableObject { // mit extends werden Eigenschaften einer 
         }, 1000 / 60);
 
         setInterval(() => {
-            if (!this.hitted) this.playAnimation(this.IMAGES_WALKING);
+            if (!this.isHit) this.playAnimation(this.IMAGES_WALKING);
             else {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;

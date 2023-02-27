@@ -28,8 +28,8 @@ canvas {
 }
 
 .start-screen {
-    position: absolute;
-    top: 0;
+    display: block;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
 .start-img {
@@ -37,14 +37,15 @@ canvas {
     width: 720px;
 }
 
-.button-container {
+.game-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
     position: absolute;
-    bottom: 0;
-    width: 720px;
+    top: 0;
+    width: 100%;
+    padding: 10px;
 }
 
 button {
@@ -61,7 +62,7 @@ button:hover {
     background-color: rgb(249, 189, 0);
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
@@ -71,9 +72,29 @@ button:hover {
     align-items: center;
 }
 
+.controller-button-container {
+    display: none;
+}
+
+
+/* iPads ------- */
+@media only screen and (max-width: 800px) {
+    .controller-button-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+}
+
+
 /* Smartphones ------- */
 @media only screen and (max-width: 720px) {
     canvas {
+        width: 100%;
+    }
+
+    .start-img {
+        height: 100%;
         width: 100%;
     }
 }
@@ -81,5 +102,10 @@ button:hover {
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
+    }
+
+    .start-img {
+        height: 100%;
+        width: 100%;
     }
 }

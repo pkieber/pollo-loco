@@ -35,9 +35,12 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30;
         this.applyGravity();
         if (!this.mute) this.throw_sound.play(); // ?? 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.x += 10;
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
-        }, 25);
+            setTimeout(() => {
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            }, 1100);
+        }, 50);
     }
 }

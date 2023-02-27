@@ -47,7 +47,15 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             // this.statusBarBottles.setPercentage(this.character.energy); //? 
             this.throwableObjects.push(bottle);
+            this.bottleCount();
         }
+    }
+
+    // If bottle is thrown, set the bottle count minus 1.
+    bottleCount() {
+        this.character.bottle -= 1;
+        console.log('Collision with Character, bottles', this.character.bottle);
+        this.statusBarBottles.setPercentage(this.character.bottle);
     }
 
 
@@ -103,6 +111,7 @@ class World {
         this.throwableObjects.forEach ((throwableObject) => {
             if(this.endboss.isColliding(throwableObject)) {
             this.endboss.bottleHitEndboss();
+            this.endboss.isHit = true; // TEST //////////////////
             this.statusBarEndboss.setPercentage(this.endboss.bossEnergy); // ENERGIE WIRD KOMPLETT ABEZOGEN
             console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
             } 
@@ -121,7 +130,7 @@ class World {
             let crushedChicken = this.level.enemies.indexOf(enemy);
             //if (!this.level.enemies[hittedChicken].hitted && !this.character.mute)
             //this.level.enemies[hittedChicken].audio_hitted.play();
-            this.level.enemies[crushedChicken].hitted = true;
+            this.level.enemies[crushedChicken].isHit = true;
             console.log("CHICKEN CRUSHED", crushedChicken);
             this.removeEnemy(enemy);
             }

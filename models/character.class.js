@@ -67,7 +67,7 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
     pain_sound = new Audio('audio/pain.mp3');
-    death_sound = new Audio('audio/character_death.mp3');
+    // death_sound = new Audio('audio/character_death.mp3');
     background_sound = new Audio('audio/chicken.mp3');
 
 
@@ -111,7 +111,7 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
         setInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
             if (this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
-                if (!this.mute) this.death_sound.play();
+                //  if (!this.mute) this.death_sound.play();
 
             } else if (this.isHurt()){ 
                     this.playAnimation(this.IMAGES_HURT);

@@ -1,13 +1,45 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervalIds = [];
+// audio files
 
-function init(){
+
+function startGame() {
+    initLevel();
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('startBtn').classList.add('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
-    // console.log('My Character is', world.character);
+    btnPanelPressEvents();
+    // console.log('My Character is', world.character);}
 }
+
+
+function restart() {
+    location.reload();
+}
+
+
+// Function to stop all intervals
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
+}
+
+
+function stopGame() {
+    intervalIds.forEach(clearInterval);
+}
+
+
+/* Alternative (quick and dirty), um alle Intervalle zu beenden. */
+/*
+clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+*/
 
 
 // Mute and unmute background sound
@@ -87,3 +119,47 @@ window.addEventListener('keyup', (e) => {
     }
     // console.log(e);
 });
+
+
+// Mobile control panel
+function btnPanelPressEvents() {
+    document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+
+    document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    }); 
+
+    document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('btnRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('btnJump').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+
+    document.getElementById('btnJump').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
+}
