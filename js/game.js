@@ -42,6 +42,25 @@ clearAllIntervals() {
 */
 
 
+function showEndscreenWin() {
+    document.getElementById('endscreenWin').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('startBtn').classList.remove('d-none');
+    document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
+    document.getElementById('startBtn').setAttribute('title', 'Play again'); // Change button title from 'Start Game' to 'Play again'
+    document.getElementById('startBtn').setAttribute('onclick', 'restart()');
+}
+
+function showEndscreenLost() {
+    document.getElementById('endscreenLost').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('startBtn').classList.remove('d-none');
+    document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
+    document.getElementById('startBtn').setAttribute('title', 'Play again'); // Change button title from 'Start Game' to 'Play again'
+    document.getElementById('startBtn').setAttribute('onclick', 'restart()');
+}
+
+
 // Mute and unmute background sound
 function soundOff() {
     if (!world.character.mute) {

@@ -94,9 +94,9 @@ class Endboss extends MovableObject {
                 //this.death_sound.play();
                 setTimeout(() => {
                     stopGame();
+                    showEndscreenWin(); // Endboss is dead, show "Game Over!"-endscreen.
                 }, 2000);
-                // showEndscreen();
-        
+
             } else if (this.isBossHurt()){ 
                 this.playAnimation(this.IMAGES_HURT);
                 // this.pain_sound.play();
