@@ -46,7 +46,8 @@ class Endboss extends MovableObject {
     ];
 
     walking_sound = new Audio('audio/pollo_loco.mp3');
-
+    hadFirstContact = false; // Endboss has first contact with character.
+    
 
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]); // Preload first image. 
@@ -81,16 +82,20 @@ class Endboss extends MovableObject {
 
 
     animate(){
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.moveLeft();
             //this.walking_sound.play();
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             console.log('Boss is dead: ', this.bossEnergy == 0, 'Boss is hurt ', this.isBossHurt());
             if (this.bossEnergy == 0){
                 this.playAnimation(this.IMAGES_DEAD);
                 //this.death_sound.play();
+                setTimeout(() => {
+                    stopGame();
+                }, 2000);
+                // showEndscreen();
         
             } else if (this.isBossHurt()){ 
                 this.playAnimation(this.IMAGES_HURT);

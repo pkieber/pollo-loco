@@ -30,12 +30,12 @@ class Chicken extends MovableObject { // mit extends werden Eigenschaften einer 
 
 
     animate(){
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.moveLeft();
             // this.background_sound.play(); 
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (!this.isHit) this.playAnimation(this.IMAGES_WALKING);
             else {
                 this.playAnimation(this.IMAGES_DEAD);

@@ -84,23 +84,23 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
     
     animate(){
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.walking_sound.pause();
             if (!this.mute) this.background_sound.play();  
 
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){ // Grenze am rechten Ende.
+            if(this.canMoveRight()){ // Grenze am rechten Ende.
                 this.moveRight();
                 this.otherDirection = false;
                 if (!this.mute) this.walking_sound.play(); 
             }
 
-            if(this.world.keyboard.LEFT && this.x > 0){ // Charakter kann links nicht aus dem Bild laufen. 
+            if(this.canMoveLeft()){ // Charakter kann links nicht aus dem Bild laufen. 
                 this.moveLeft();
                 this.otherDirection = true;
                 if (!this.mute) this.walking_sound.play();
             }
 
-            if(this.world.keyboard.SPACE && !this.isAboveGround()){ // Keyboard SPACE and NOT above ground...
+            if(this.canJump()){ // Keyboard SPACE and NOT above ground...
                 this.jump();
                 if (!this.mute) this.jumping_sound.play();
             }
@@ -108,10 +108,14 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
             this.world.camera_x = -this.x + 100; // + 100 damit Charakter nicht am Rand klebt.
         }, 1000 / 60);
 
-        setInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
+        setStoppableInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
             if (this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
                 //  if (!this.mute) this.death_sound.play();
+                setTimeout(() => {
+                    stopGame();
+                }, 2000);
+                // showEndscreen();
 
             } else if (this.isHurt()){ 
                     this.playAnimation(this.IMAGES_HURT);
@@ -127,6 +131,18 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 100);
+    }
+
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    }
+
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > 0;
+    }
+
+    canJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 }
 
