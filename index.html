@@ -42,9 +42,15 @@
             <img id="endscreenLost" class="start-img d-none" src="./img/9_intro_outro_screens/game_over/oh no you lost!.png">
             <img id="endscreenWin" class="start-img d-none" src="./img/9_intro_outro_screens/game_over/game over!.png">
         </div>
-        
-        
+        <div id="overlayInstruction">
+            <!--<div class="overlay-close-btn">X</div>-->
+            <h2>Instructions:</h2>
+            <p>Press D = THROW a bottle</p>
+            <p>Press SPACE = JUMP</p>
+            <p>Use ARROWS = move LEFT / RIGHT</p>
+        </div>
         <div class="game-button-container">
+            <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.fill.svg"></button>
             <button title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
             <!-- <button title="Exit Fullscreen" onclick="closeFullscreen()"><img class="icons" src="./img/exit_fullscreen.svg"></button> -->
 

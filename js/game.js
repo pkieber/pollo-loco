@@ -61,6 +61,22 @@ function showEndscreenLost() {
 }
 
 
+// Show and hide instructions
+function showInstructions() {
+    document.getElementById("overlayInstruction").style.display = "block";
+}
+
+function hideInstructions() {
+    document.getElementById("overlayInstruction").style.display = "none";
+}
+
+window.addEventListener("click", function(event) {
+    if (event.target == document.getElementById("overlayInstruction")) {
+    hideInstructions();
+    }
+});
+
+
 // Mute and unmute background sound
 function soundOff() {
     if (!world.character.mute) {
