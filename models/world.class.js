@@ -43,9 +43,8 @@ class World {
 
     // If bottles are thrown, push them into the array.
     checkThrownObjects() {
-        if(this.keyboard.D) {
+        if(this.keyboard.D && this.character.bottle > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            // this.statusBarBottles.setPercentage(this.character.energy); //? 
             this.throwableObjects.push(bottle);
             this.bottleCount();
         }
@@ -77,7 +76,6 @@ class World {
             this.statusBar.setPercentage(this.character.energy);
         }
     }
-
 
 
     // Check if character and bottles are colliding (> collect bottles).
