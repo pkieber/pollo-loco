@@ -37,6 +37,27 @@ canvas {
     width: 720px;
 }
 
+.boss-animation {
+    position: absolute;
+    left: 25%;
+    top: 20%;
+    height: 300px;
+    width: 350px;
+}
+
+#endscreenWin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#endscreenLost {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 #overlayInstruction {
     position: fixed;
     top: 50%;

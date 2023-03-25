@@ -43,15 +43,18 @@ clearAllIntervals() {
 
 
 function showEndscreenWin() {
+    document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenWin').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
     document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
     document.getElementById('startBtn').setAttribute('title', 'Play again'); // Change button title from 'Start Game' to 'Play again'
     document.getElementById('startBtn').setAttribute('onclick', 'restart()');
+    document.getElementById('endscreenBossDead').classList.remove('d-none');
 }
 
 function showEndscreenLost() {
+    document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenLost').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
