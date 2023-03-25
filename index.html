@@ -49,19 +49,27 @@
         <div id="overlayInstruction">
             <!--<div class="overlay-close-btn">X</div>-->
             <h2>Instructions:</h2>
-            <p>Press D = THROW a bottle</p>
-            <p>Press SPACE = JUMP</p>
-            <p>Use ARROWS = move LEFT / RIGHT</p>
+            <p>Press D to THROW a bottle</p>
+            <p>Press SPACE to JUMP</p>
+            <p>Use ARROWS to move LEFT / RIGHT</p>
+        </div>
+        <div id="overlayStory">
+            <h2>Story:</h2>
+            <p>Once upon a time in Mexico…</p>
+            <p>El Pepe, an inconspicuous, yet courageous man from Chihuahua, was sent to the desert to face a dangerous enemy who has been threatening his village for ages.</p> 
+            <p>A final clash with the gigantic rooster, known as „El Pollo Loco“, as tall as a cactus and with claws as big as shovels, will decide the fate of El Pepe and the people of Chihuahua.</p>
+            <p>Will Pepe finally save his village from the dangerous claws of the „El Pollo Loco“ and turn into a hero? Let's find out…</p>
         </div>
         <div class="game-button-container">
-            <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.fill.svg"></button>
+            <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.svg"></button>
+            <button id="story" title="Story" onclick="showStory()"><img class="icons" src="./img/quote.bubble.svg"></button>
             <button title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
             <!-- <button title="Exit Fullscreen" onclick="closeFullscreen()"><img class="icons" src="./img/exit_fullscreen.svg"></button> -->
 
             <button id = "mute" title="Sound Off" onclick="soundOff()"><img class="icons" src="./img/speaker.slash.fill.svg"></button>
             <button id = "unmute" title="Sound On" onclick="soundOn()" class="d-none"><img class="icons" src="./img/speaker.fill.svg"></button>
         
-            <button id= "startBtn" title="Start Game" onclick="startGame()"><img class="icons" src="./img/play.fill.svg"></button>
+            <button id= "startBtn" title="Start Game" onclick="startGame()"><img class="icons" src="./img/play.svg"></button>
             <!-- <button class="d-none" title="Stop Game" onclick="stopGame()"><img class="icons" src="./img/play.slash.fill.svg"></button> -->
         </div>
 

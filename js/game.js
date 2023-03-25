@@ -75,9 +75,21 @@ function hideInstructions() {
 
 window.addEventListener("click", function(event) {
     if (event.target == document.getElementById("overlayInstruction")) {
-    hideInstructions();
+        hideInstructions();
     }
+    if (event.target == document.getElementById("overlayStory")) {
+        hideStory();
+    }   
 });
+
+// Show and hide story
+function showStory() {
+    document.getElementById("overlayStory").style.display = "block";
+}
+
+function hideStory() {
+    document.getElementById("overlayStory").style.display = "none";
+}
 
 
 // Mute and unmute background sound
