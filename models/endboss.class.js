@@ -7,14 +7,10 @@ class Endboss extends MovableObject {
     bossEnergy = 100;
     bossEnergyLoss = 12.5;
     lastBossHit = 0;
+    intervalIds = [];
 
-    IMAGES_WALKING = [
-        './img/4_enemie_boss_chicken/1_walk/G1.png', 
-        './img/4_enemie_boss_chicken/1_walk/G2.png', 
-        './img/4_enemie_boss_chicken/1_walk/G3.png', 
-        './img/4_enemie_boss_chicken/1_walk/G4.png', 
-    ];
-    IMAGES_ALERT = [
+
+    IMAGES_ATTACKING = [
         './img/4_enemie_boss_chicken/2_alert/G5.png', 
         './img/4_enemie_boss_chicken/2_alert/G6.png',
         './img/4_enemie_boss_chicken/2_alert/G7.png',
@@ -22,9 +18,7 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/2_alert/G9.png',
         './img/4_enemie_boss_chicken/2_alert/G10.png',
         './img/4_enemie_boss_chicken/2_alert/G11.png',
-        './img/4_enemie_boss_chicken/2_alert/G12.png'
-    ];
-    IMAGES_ATTACK = [
+        './img/4_enemie_boss_chicken/2_alert/G12.png',
         './img/4_enemie_boss_chicken/3_attack/G13.png', 
         './img/4_enemie_boss_chicken/3_attack/G14.png', 
         './img/4_enemie_boss_chicken/3_attack/G15.png', 
@@ -34,32 +28,33 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/3_attack/G19.png', 
         './img/4_enemie_boss_chicken/3_attack/G20.png' 
     ];
-    IMAGES_HURT = [
+    IMAGES_WALKING = [
+        './img/4_enemie_boss_chicken/1_walk/G1.png', 
+        './img/4_enemie_boss_chicken/1_walk/G2.png', 
+        './img/4_enemie_boss_chicken/1_walk/G3.png', 
+        './img/4_enemie_boss_chicken/1_walk/G4.png', 
+    ];
+    IMAGES_DYING = [
         './img/4_enemie_boss_chicken/4_hurt/G21.png', 
         './img/4_enemie_boss_chicken/4_hurt/G22.png', 
-        './img/4_enemie_boss_chicken/4_hurt/G23.png'
-    ];
-    IMAGES_DEAD = [
+        './img/4_enemie_boss_chicken/4_hurt/G23.png',
         './img/4_enemie_boss_chicken/5_dead/G24.png',
         './img/4_enemie_boss_chicken/5_dead/G25.png',
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
-
-    walking_sound = new Audio('audio/pollo_loco.mp3');
-    hadFirstContact = false; // Endboss has first contact with character.
+    //walking_sound = new Audio('audio/pollo_loco.mp3');
+    hadFirstContact = false;
     
 
     constructor(){
-        super().loadImage(this.IMAGES_WALKING[0]); // Preload first image. 
+        super().loadImage(this.IMAGES_ATTACKING[0]);
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_ALERT);
-        this.loadImages(this.IMAGES_ATTACK);
-        this.loadImages(this.IMAGES_HURT);           
-        this.loadImages(this.IMAGES_DEAD); 
+        this.loadImages(this.IMAGES_ATTACKING);
+        this.loadImages(this.IMAGES_DYING); 
         this.x = 2600; 
-        this.bottleHitEndboss();
-        this.isHurt();
-        this.animate();            
+        this.speed = 3 + Math.random() * 0.25;
+        this.attackingSpeed = 30;
+        this.animateEndboss();            
     }
 
     
@@ -80,33 +75,47 @@ class Endboss extends MovableObject {
         return timepassed < 0.5;
     }
 
-
-    animate(){
-        setStoppableInterval(() => {
-            this.moveLeft();
-            //this.walking_sound.play();
-        }, 1000 / 60);
-
-        setStoppableInterval(() => {
-            console.log('Boss is dead: ', this.bossEnergy == 0, 'Boss is hurt ', this.isBossHurt());
-            if (this.bossEnergy == 0){
-                this.playAnimation(this.IMAGES_DEAD);
-                //this.death_sound.play();
-                setTimeout(() => {
-                    stopGame();
-                    showEndscreenWin(); // Endboss is dead, show "Game Over!"-endscreen.
-                }, 2000);
-
-            } else if (this.isBossHurt()){ 
-                this.playAnimation(this.IMAGES_HURT);
-                // this.pain_sound.play();
-        
+    animateEndboss() {
+        let i = 0;
+        setInterval(() => {
+            if (i < 30) {
+                this.playAnimation(this.IMAGES_ATTACKING);
             } else {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.endbossAnimation();
             }
-        }, 200);
+            i++;
+            if ((world.character.x > world.level.endboss[0].x - 300) && !this.hadFirstContact) {
+                i = 0;
+                this.hadFirstContact = true;
+                console.log("Endboss has first contact with character.", this.hadFirstContact);
+            }
+        }, 120);
+    }
+
+    endbossAnimation() {
+        if (this.bossEnergy!==0 && !this.isBossHurt() && this.endbossShowdown()) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.moveLeft();
+        } else if (this.bossEnergy<=0) {
+            this.endbossDying();
+        }
+    }
+
+    endbossShowdown() {
+        return world.character.x > world.level.endboss[0].x - 800;
+    }
+
+    endbossAttacking() {
+        let attackingSpeedIncrease = world.level.endboss[0].x -= this.attackingSpeed;
+        return attackingSpeedIncrease;
+    }
+
+    endbossDying () {
+        setTimeout(() => {
+            stopGame();
+            showEndscreenWin();
+        }, 2000);
     }
 }
-
 
 
