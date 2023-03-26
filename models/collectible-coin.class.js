@@ -9,7 +9,6 @@ class CollectibleCoin extends MovableObject {
     constructor(x, y) {
         super();
         this.loadImage('./img/8_coin/coin_1.png');
-        // this.loadImages(this.IMAGES_COLLECTIBLE_COINS);
         this.x = x;
         this.y = y;
     }

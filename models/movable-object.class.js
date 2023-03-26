@@ -11,6 +11,10 @@ class MovableObject extends DrawableObject{
     offsetY = 100;
     offsetX = 0;
 
+    collectcoin_sound = new Audio('audio/collectbottle.mp3');
+    collectbottle_sound = new Audio('audio/collectcoin.mp3');
+
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -52,6 +56,7 @@ class MovableObject extends DrawableObject{
     // Coins are being collected by character.
     collectCoin() {
         this.coin += 1;
+        if (!world.character.mute) this.collectcoin_sound.play();
         if (this.coin <= 0) {
             this.coin = 0;
         } else {
@@ -63,6 +68,7 @@ class MovableObject extends DrawableObject{
     // Bottles are being collected by character.
     collectBottle() {
         this.bottle += 1;
+        if (!world.character.mute) this.collectbottle_sound.play();
         if (this.bottle <= 0) {
             this.bottle = 0;
         } else {
@@ -72,8 +78,8 @@ class MovableObject extends DrawableObject{
 
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timepassed = timepassed / 1000; // Difference in seconds 
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
         return timepassed < 0.5;
     }
 
@@ -84,7 +90,7 @@ class MovableObject extends DrawableObject{
 
 
     playAnimation(images) {
-        let i = this.currentImage % images.length; // let i = 0 % 6; // see remainder operator // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0 ...
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
@@ -94,11 +100,11 @@ class MovableObject extends DrawableObject{
         this.x += this.speed;
     }
 
-    moveLeft(){ // x-Koordinate verändern, um zu animieren
+    moveLeft(){
         this.x -= this.speed;
     }
 
     jump(){
-        this.speedY = 30; // Jumping height
+        this.speedY = 30;
     }
 }

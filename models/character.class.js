@@ -1,4 +1,4 @@
-class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktionen: moveRight und jump
+class Character extends MovableObject{
 
     height = 300;
     width = 120;
@@ -62,7 +62,7 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
         './img/2_character_pepe/1_idle/long_idle/I-20.png'
     ]
 
-    world; // Um auf Variablen (z.B. Keyboard) aus World zugreifen zu können. 
+    world;
 
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
@@ -72,9 +72,9 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
 
 
     constructor(){
-        super().loadImage('./img/2_character_pepe/2_walk/W-21.png');    // super muss nur einmal verwendet werden...
-        this.loadImages(this.IMAGES_WALKING);                           // ... Hier werden Walking-Bilder geladen. 
-        this.loadImages(this.IMAGES_JUMPING);                           // ... Hier werden Jumping-Bilder geladen. 
+        super().loadImage('./img/2_character_pepe/2_walk/W-21.png');    
+        this.loadImages(this.IMAGES_WALKING);                           
+        this.loadImages(this.IMAGES_JUMPING);                           
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
@@ -88,24 +88,24 @@ class Character extends MovableObject{ // x- und y-Koordinate und zwei Funktione
             this.walking_sound.pause();
             if (!this.mute) this.background_sound.play();  
 
-            if(this.canMoveRight()){ // Grenze am rechten Ende.
+            if(this.canMoveRight()){ 
                 this.moveRight();
                 this.otherDirection = false;
                 if (!this.mute) this.walking_sound.play(); 
             }
 
-            if(this.canMoveLeft()){ // Charakter kann links nicht aus dem Bild laufen. 
+            if(this.canMoveLeft()){ 
                 this.moveLeft();
                 this.otherDirection = true;
                 if (!this.mute) this.walking_sound.play();
             }
 
-            if(this.canJump()){ // Keyboard SPACE and NOT above ground...
+            if(this.canJump()){
                 this.jump();
                 if (!this.mute) this.jumping_sound.play();
             }
 
-            this.world.camera_x = -this.x + 100; // + 100 damit Charakter nicht am Rand klebt.
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setStoppableInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images

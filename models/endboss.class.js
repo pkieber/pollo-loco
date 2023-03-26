@@ -42,7 +42,8 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G25.png',
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
-    //walking_sound = new Audio('audio/pollo_loco.mp3');
+    walking_sound = new Audio('audio/pollo_loco.mp3');
+    win_sound = new Audio('audio/win.mp3');
     hadFirstContact = false;
     
 
@@ -80,6 +81,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (i < 30) {
                 this.playAnimation(this.IMAGES_ATTACKING);
+                if (!world.character.mute) this.walking_sound.play();
             } else {
                 this.endbossAnimation();
             }
@@ -97,6 +99,7 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
         } else if (this.bossEnergy<=0) {
+            if (!world.character.mute) this.win_sound.play();
             this.endbossDying();
         }
     }

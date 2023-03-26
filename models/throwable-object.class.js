@@ -1,5 +1,4 @@
 class ThrowableObject extends MovableObject {
-    mute = false;
     bottleCollision = false;
 
     IMAGES_BOTTLE_ROTATION = [
@@ -34,7 +33,7 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-        if (!this.mute) this.throw_sound.play(); // ?? 
+        if (!world.character.mute) this.throw_sound.play();
         setStoppableInterval(() => {
             this.x += 10;
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
