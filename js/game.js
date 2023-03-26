@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
-// audio files
 
 
 function startGame() {
@@ -10,6 +9,7 @@ function startGame() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startBtn').classList.add('d-none');
+    document.getElementById('screenBtn').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     btnPanelPressEvents();
@@ -31,15 +31,8 @@ function setStoppableInterval(fn, time) {
 
 function stopGame() {
     intervalIds.forEach(clearInterval);
+    document.getElementById('screenBtn').classList.add('d-none');
 }
-
-
-/* Alternative (quick and dirty), um alle Intervalle zu beenden. */
-/*
-clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
-}
-*/
 
 
 function showEndscreenWin() {

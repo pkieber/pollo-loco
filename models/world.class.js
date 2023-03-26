@@ -12,6 +12,9 @@ class World {
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
 
+    smashchicken_sound = new Audio('audio/smashchicken.mp3');
+    bottlesplash_sound = new Audio('audio/bottlesplash.mp3');
+
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
@@ -110,7 +113,9 @@ class World {
             if(this.endboss.isColliding(throwableObject)) {
             this.endboss.bottleHitEndboss();
             this.endboss.isHit = true; // TEST //////////////////
-            this.statusBarEndboss.setPercentage(this.endboss.bossEnergy); // ENERGIE WIRD KOMPLETT ABEZOGEN
+            //if (!world.character.mute) this.bottlesplash_sound.play();
+            if (!world.character.mute) this.smashchicken_sound.play();
+            this.statusBarEndboss.setPercentage(this.endboss.bossEnergy);
             console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
             } 
         }); 
@@ -126,8 +131,7 @@ class World {
                 this.character.isAboveGround()
             ) {
             let crushedChicken = this.level.enemies.indexOf(enemy);
-            //if (!this.level.enemies[hittedChicken].hitted && !this.character.mute)
-            //this.level.enemies[hittedChicken].audio_hitted.play();
+            //if (!world.character.mute) this.smashchicken_sound.play();
             this.level.enemies[crushedChicken].isHit = true;
             console.log("CHICKEN CRUSHED", crushedChicken);
             this.removeEnemy(enemy);

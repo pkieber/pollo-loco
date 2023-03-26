@@ -63,12 +63,11 @@
         <div class="game-button-container">
             <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.svg"></button>
             <button id="story" title="Story" onclick="showStory()"><img class="icons" src="./img/quote.bubble.svg"></button>
-            <button title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
-            <!-- <button title="Exit Fullscreen" onclick="closeFullscreen()"><img class="icons" src="./img/exit_fullscreen.svg"></button> -->
-
-            <button id = "mute" title="Sound Off" onclick="soundOff()"><img class="icons" src="./img/speaker.slash.fill.svg"></button>
-            <button id = "unmute" title="Sound On" onclick="soundOn()" class="d-none"><img class="icons" src="./img/speaker.fill.svg"></button>
-        
+            <div id="screenBtn" class="d-none">
+                <button id="fullscreen" title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
+                <button id = "mute" title="Sound Off" onclick="soundOff()"><img class="icons" src="./img/speaker.slash.fill.svg"></button>
+                <button id = "unmute" title="Sound On" onclick="soundOn()" class="d-none"><img class="icons" src="./img/speaker.fill.svg"></button>
+            </div>
             <button id= "startBtn" title="Start Game" onclick="startGame()"><img class="icons" src="./img/play.svg"></button>
             <!-- <button class="d-none" title="Stop Game" onclick="stopGame()"><img class="icons" src="./img/play.slash.fill.svg"></button> -->
         </div>
