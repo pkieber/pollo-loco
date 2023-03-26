@@ -99,7 +99,6 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
         } else if (this.bossEnergy<=0) {
-            if (!world.character.mute) this.win_sound.play();
             this.endbossDying();
         }
     }
@@ -117,7 +116,9 @@ class Endboss extends MovableObject {
         setTimeout(() => {
             stopGame();
             showEndscreenWin();
-        }, 2000);
+            if (!world.character.mute) this.win_sound.play();
+            soundOff();
+        }, 1000);
     }
 }
 
