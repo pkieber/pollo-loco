@@ -20,21 +20,24 @@ h1 {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
+h2 {
+    margin: 0;
+}
+
 canvas {
     background-color: black;
     display: block;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-    /*border-radius: 10px;*/
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .start-screen {
     display: block;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
 .start-img {
     height: 480px;
     width: 720px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .boss-animation {
@@ -64,13 +67,13 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(246, 206, 73);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px 30px 10px 30px;    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     display: none;
     cursor: pointer;
     font-size: 24px;
+    opacity: 0.9;
 }
 
 #overlayStory {
@@ -79,13 +82,28 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(246, 206, 73);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px 30px 10px 30px;    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     display: none;
     cursor: pointer;
     font-size: 24px;
+    opacity: 0.9;
+}
+
+.overlay-headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overlay-btn {
+    height: 20px;
+    transition: all 225ms ease-in-out;
+}
+
+.overlay-btn:hover {
+    height: 25px;
 }
 
 .game-button-container {
@@ -107,6 +125,8 @@ button {
     width: 40px;
     border-radius: 100%;
     background-color: rgb(246, 206, 73);
+    opacity: 0.9;
+    transition: all 225ms ease-in-out;
 }
 
 button:hover {
