@@ -81,7 +81,6 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (i < 30) {
                 this.playAnimation(this.IMAGES_ATTACKING);
-                if (!world.character.mute) this.walking_sound.play();
             } else {
                 this.endbossAnimation();
             }
@@ -89,6 +88,7 @@ class Endboss extends MovableObject {
             if ((world.character.x > world.level.endboss[0].x - 300) && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
+                if (!world.character.mute) this.walking_sound.play();
                 console.log("Endboss has first contact with character.", this.hadFirstContact);
             }
         }, 120);
