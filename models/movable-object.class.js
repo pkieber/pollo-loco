@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject{
     offsetY = 100;
     offsetX = 0;
 
+
     collectcoin_sound = new Audio('audio/collectbottle.mp3');
     collectbottle_sound = new Audio('audio/collectcoin.mp3');
     
@@ -23,6 +24,7 @@ class MovableObject extends DrawableObject{
             }
         }, 1000 / 25);
     }
+
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
@@ -96,13 +98,16 @@ class MovableObject extends DrawableObject{
         this.currentImage++;
     }
 
+
     moveRight(){
         this.x += this.speed;
     }
 
+
     moveLeft(){
         this.x -= this.speed;
     }
+
 
     jump(){
         this.speedY = 30;

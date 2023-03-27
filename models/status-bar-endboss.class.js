@@ -1,5 +1,4 @@
 class statusBarEndboss extends DrawableObject {
-    
     IMAGES = [
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png', // 0 = Zero Energy
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/20.png',
@@ -8,7 +7,9 @@ class statusBarEndboss extends DrawableObject {
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/100.png', // 4 = Full Energy
     ];
 
+
     percentage = 100;
+
 
     constructor(){
         super(); // Methoden von übergeordneten Objekt initialisieren. 
@@ -20,12 +21,14 @@ class statusBarEndboss extends DrawableObject {
         this.setPercentage(100);                       
     }
 
+
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 4;

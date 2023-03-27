@@ -30,6 +30,7 @@ class DrawableObject {
         }
     }
     
+
     drawFrame(ctx) {
         // Canvas draw rectangle
         if(this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
@@ -53,6 +54,5 @@ class DrawableObject {
                 this.imageCache[path] = img;
             });
         }
-
 }
 

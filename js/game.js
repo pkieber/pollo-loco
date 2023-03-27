@@ -46,6 +46,7 @@ function showEndscreenWin() {
     document.getElementById('endscreenBossDead').classList.remove('d-none');
 }
 
+
 function showEndscreenLost() {
     document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenLost').classList.remove('d-none');
@@ -62,9 +63,11 @@ function showInstructions() {
     document.getElementById("overlayInstruction").style.display = "block";
 }
 
+
 function hideInstructions() {
     document.getElementById("overlayInstruction").style.display = "none";
 }
+
 
 window.addEventListener("click", function(event) {
     if (event.target == document.getElementById("overlayInstruction")) {
@@ -75,10 +78,12 @@ window.addEventListener("click", function(event) {
     }   
 });
 
+
 // Show and hide story
 function showStory() {
     document.getElementById("overlayStory").style.display = "block";
 }
+
 
 function hideStory() {
     document.getElementById("overlayStory").style.display = "none";
@@ -93,6 +98,7 @@ function soundOff() {
     world.character.mute = true;
     } 
 }
+
 
 function soundOn() {
     if (world.character.mute) {
@@ -139,6 +145,7 @@ window.addEventListener('keydown', (e) => {
     }
     // console.log(e);
 });
+
 
 // Taste loslassen
 window.addEventListener('keyup', (e) => {

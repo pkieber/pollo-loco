@@ -5,6 +5,7 @@ class Character extends MovableObject{
     speed = 10;
     mute = false;
 
+
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-22.png',
         './img/2_character_pepe/2_walk/W-23.png',
@@ -60,6 +61,7 @@ class Character extends MovableObject{
         './img/2_character_pepe/1_idle/long_idle/I-20.png'
     ]
 
+
     world;
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
@@ -81,12 +83,8 @@ class Character extends MovableObject{
 
 
     animate(){
-        setStoppableInterval(() => {
-            this.moveCharacter();
-        }, 1000 / 60);
-        setStoppableInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
-            this.playCharacterAnimation();
-        }, 100);
+        setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+        setStoppableInterval(() => this.playCharacterAnimation(), 100);
     }
 
 

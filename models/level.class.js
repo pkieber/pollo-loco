@@ -7,6 +7,7 @@ class level {
     collectibleBottles;
     collectibleCoins;
 
+
     constructor(enemies, endboss, clouds, backgroundObjects, collectibleBottles, collectibleCoins){
         this.enemies = enemies;
         this.endboss = endboss;

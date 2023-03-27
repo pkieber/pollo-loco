@@ -12,6 +12,7 @@ class World {
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
 
+
     smashchicken_sound = new Audio('audio/smashchicken.mp3');
     bottlesplash_sound = new Audio('audio/bottlesplash.mp3');
 
@@ -53,6 +54,7 @@ class World {
         }
     }
 
+    
     // If bottle is thrown, set the bottle count minus 1.
     bottleCount() {
         this.character.bottle -= 1;

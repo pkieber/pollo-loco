@@ -1,5 +1,4 @@
 class Endboss extends MovableObject {
-
     height = 400;
     width = 340;
     y = 50;
@@ -42,6 +41,8 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G25.png',
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
+
+
     walking_sound = new Audio('audio/pollo_loco.mp3');
     win_sound = new Audio('audio/win.mp3');
     hadFirstContact = false;
@@ -76,13 +77,14 @@ class Endboss extends MovableObject {
         return timepassed < 0.5;
     }
 
+
     animateEndboss() {
         let i = 0;
         setInterval(() => {
             if (i < 30) {
                 this.playAnimation(this.IMAGES_ATTACKING);
             } else {
-                this.endbossAnimation();
+                this.playEndbossAnimation();
             }
             i++;
             if ((world.character.x > world.level.endboss[0].x - 300) && !this.hadFirstContact) {
@@ -94,7 +96,8 @@ class Endboss extends MovableObject {
         }, 120);
     }
 
-    endbossAnimation() {
+
+    playEndbossAnimation() {
         if (this.bossEnergy!==0 && !this.isBossHurt() && this.endbossShowdown()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
@@ -121,5 +124,3 @@ class Endboss extends MovableObject {
         }, 1000);
     }
 }
-
-

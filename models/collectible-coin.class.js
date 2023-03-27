@@ -3,8 +3,11 @@ class CollectibleCoin extends MovableObject {
         './img/8_coin/coin_1.png', 
         './img/8_coin/coin_2.png'
     ];
+
+
     height = 120;
     width = 120;
+
 
     constructor(x, y) {
         super();

@@ -1,5 +1,4 @@
 class StatusBarCharacter  extends DrawableObject { // see World.class.js !!
-    
     IMAGES = [
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png', // 0
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
@@ -9,7 +8,9 @@ class StatusBarCharacter  extends DrawableObject { // see World.class.js !!
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png' // 5
     ];
 
+
     percentage = 100;
+
 
     constructor(){
         super(); // Methoden von übergeordneten Objekt initialisieren. 
@@ -21,12 +22,14 @@ class StatusBarCharacter  extends DrawableObject { // see World.class.js !!
         this.setPercentage(100);                       
     }
 
+
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
