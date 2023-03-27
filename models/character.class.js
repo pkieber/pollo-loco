@@ -1,10 +1,8 @@
 class Character extends MovableObject{
-
     height = 300;
     width = 120;
     y = 130;
     speed = 10;
-    
     mute = false;
 
     IMAGES_WALKING = [
@@ -63,7 +61,6 @@ class Character extends MovableObject{
     ]
 
     world;
-
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
     pain_sound = new Audio('audio/pain.mp3');
@@ -81,74 +78,75 @@ class Character extends MovableObject{
         this.applyGravity();
         this.animate();
     }
-    
+
+
     animate(){
-
         setStoppableInterval(() => {
-            this.walking_sound.pause();
-            if (!this.mute) {
-                this.background_sound.play();  
-            } else {
-                this.background_sound.pause();
-            } 
-
-            if(this.canMoveRight()){ 
-                this.moveRight();
-                this.otherDirection = false;
-                if (!this.mute) this.walking_sound.play(); 
-            }
-
-            if(this.canMoveLeft()){ 
-                this.moveLeft();
-                this.otherDirection = true;
-                if (!this.mute) this.walking_sound.play();
-            }
-
-            if(this.canJump()){
-                this.jump();
-                if (!this.mute) this.jumping_sound.play();
-            }
-
-            this.world.camera_x = -this.x + 100;
+            this.moveCharacter();
         }, 1000 / 60);
-
         setStoppableInterval(() => { // IF above ground, show Jumping-images, ELSE IF keyboard RIGHT OR LEFT, show Walking-Images
-            if (this.isDead()){
-                this.playAnimation(this.IMAGES_DEAD);
-                if (!this.mute) this.death_sound.play();
-                setTimeout(() => {
-                    stopGame();
-                    showEndscreenLost(); // Character is dead, show "You Lost!"-endscreen.
-                }, 2000);
-
-            } else if (this.isHurt()){ 
-                    this.playAnimation(this.IMAGES_HURT);
-                    if (!this.mute) this.pain_sound.play();
-
-            } else if (this.isAboveGround()){ 
-                    this.playAnimation(this.IMAGES_JUMPING);
-
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
-                    this.playAnimation(this.IMAGES_WALKING);
-
-            } else {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
+            this.playCharacterAnimation();
         }, 100);
     }
+
+
+    moveCharacter(){
+        this.walking_sound.pause();
+        if (!this.mute) {
+            this.background_sound.play();  
+        } else {
+            this.background_sound.pause();
+        } 
+        if(this.canMoveRight()){ 
+            this.moveRight();
+            this.otherDirection = false;
+            if (!this.mute) this.walking_sound.play(); 
+        }
+        if(this.canMoveLeft()){ 
+            this.moveLeft();
+            this.otherDirection = true;
+            if (!this.mute) this.walking_sound.play();
+        }
+        if(this.canJump()){
+            this.jump();
+            if (!this.mute) this.jumping_sound.play();
+        }
+        this.world.camera_x = -this.x + 100;
+    }
+
+
+    playCharacterAnimation(){
+        if (this.isDead()){
+            this.playAnimation(this.IMAGES_DEAD);
+            if (!this.mute) this.death_sound.play();
+            setTimeout(() => {
+                stopGame();
+                showEndscreenLost(); // Character is dead, show "You Lost!"-endscreen.
+            }, 2000);
+        } else if (this.isHurt()){ 
+                this.playAnimation(this.IMAGES_HURT);
+                if (!this.mute) this.pain_sound.play();
+        } else if (this.isAboveGround()){ 
+                this.playAnimation(this.IMAGES_JUMPING);
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
+                this.playAnimation(this.IMAGES_WALKING);
+        } else {
+            this.playAnimation(this.IMAGES_IDLE);
+        }
+    }
+
 
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
+
 
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 }
-
-
-
