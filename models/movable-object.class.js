@@ -8,14 +8,28 @@ class MovableObject extends DrawableObject{
     energy = 100;
     energyLoss = 2; 
     lastHit = 0;
-    offsetY = 100;
-    offsetX = 0;
+    /**
+     * Offset is used to adjust the collision detection variables.
+     */
+    //offsetY = 100;
+    //offsetX = 0;
+    offset = {
+        top: -20,
+        bottom: 0,
+        left: 10,
+        right: 10
+    }
 
 
     collectcoin_sound = new Audio('audio/collectbottle.mp3');
     collectbottle_sound = new Audio('audio/collectcoin.mp3');
     
 
+    /**
+     * This function applies gravity to the character.
+     * This speedY variable is used to calculate the character's vertical position.
+     * The acceleration variable is used to calculate the character's vertical speed.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -26,6 +40,11 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * This function checks if the character is jumping or falling.
+     * This.y < 120 is used to check if the character is on the ground.
+     * @returns 
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true; 
@@ -35,16 +54,32 @@ class MovableObject extends DrawableObject{
     }
     
 
-    // Bessere Formel zur Kollisionsberechnung (Genauer)
+    /**
+     * This function checks if a collision is happening on top, bottom, left or right of a movable object.
+     * Offset is used to adjust the collision detection variables.
+     * @param {*} mo 
+     * @returns 
+     */  
+    isColliding(mo) {
+        return (this.x + this.width - this.offset.right > mo.x + mo.offset.left) && // right to left collision
+        (this.y + this.height - this.offset.bottom > mo.y + mo.offset.top) && // top to bottom collision
+        (this.x + this.offset.left < mo.x + mo.width - mo.offset.right) && // left to right collision
+        (this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom); // bottom to top collision
+    }  
+    /*
     isColliding(mo) {
         return  (this.x + this.width + this.offsetX) >= mo.x && this.x <= (mo.x + mo.width) && 
                 (this.y + this.offsetY + this.height) >= mo.y &&
                 (this.y + this.offsetY) <= (mo.y + mo.height); 
                 //mo.onCollisionCourse;
     }
+    */
 
 
-    // Character loses energy (hit by enemies).
+    /**
+     * This function is called when the character is hit by an enemy.
+     * It reduces the character's energy when it is hit by an enemy.
+     */
     hit() {
         this.energy -=this.energyLoss;
         if(this.energy <=  0) {
@@ -55,7 +90,10 @@ class MovableObject extends DrawableObject{
     }
 
 
-    // Coins are being collected by character.
+    /**
+     * This function is called when the character is collecting coins.
+     * It adds to the coin counter if the character is collecting coins.
+     */
     collectCoin() {
         this.coin += 1;
         if (!world.character.mute) this.collectcoin_sound.play();
@@ -67,7 +105,10 @@ class MovableObject extends DrawableObject{
     }
 
 
-    // Bottles are being collected by character.
+    /**
+     * This function is called when the character is collecting bottles.
+     * It adds to the bottle counter if the character is collecting bottles.
+     */
     collectBottle() {
         this.bottle += 1;
         if (!world.character.mute) this.collectbottle_sound.play();
@@ -79,6 +120,11 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * This function is called when the character is hurt.
+     * The timepassed variable is used to adjust the time the character is hurt.
+     * @returns 
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
@@ -86,11 +132,20 @@ class MovableObject extends DrawableObject{
     }
 
     
+    /**
+     * This function is called when the character is dead.
+     * @returns 
+     */
     isDead() {
         return this.energy == 0;
     }
 
 
+    /**
+     * This function is called when images are used to animate the character.
+     * Cache is used to prevent the images from being loaded multiple times.
+     * @param {*} images 
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -99,16 +154,25 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * This function is called when the character is moving right.
+     */
     moveRight(){
         this.x += this.speed;
     }
 
 
+    /**
+     * This function is called when the character is moving left.
+     */
     moveLeft(){
         this.x -= this.speed;
     }
 
-
+    
+    /**
+     * This function is called when the character is jumping.
+     */
     jump(){
         this.speedY = 30;
     }

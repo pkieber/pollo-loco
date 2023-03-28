@@ -27,11 +27,18 @@ class World {
     }
 
 
+    /**
+     * This function sets the world for the character.
+     */
     setWorld(){
         this.character.world = this;
     }
 
 
+    /**
+     * This function checks whether objects are colliding with each other.
+     * If objects are colliding, further actions can be performed.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -45,7 +52,10 @@ class World {
     }
 
 
-    // If bottles are thrown, push them into the array.
+    /**
+     * This function checks if objects are thrown.
+     * If bottles are thrown, they are pushed into the array.
+     */    
     checkThrownObjects() {
         if(this.keyboard.D && this.character.bottle > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -54,8 +64,11 @@ class World {
         }
     }
 
-    
-    // If bottle is thrown, set the bottle count minus 1.
+
+    /**
+     * This function is called when the character throws a bottle.
+     * The bottle count is set to minus 1.
+     */
     bottleCount() {
         this.character.bottle -= 1;
         console.log('Collision with Character, bottles', this.character.bottle);
@@ -63,7 +76,10 @@ class World {
     }
 
 
-    // Check if character and enemies are colliding (> hit enemies).
+    /**
+     * This function checks if character and enemies are colliding.
+     * If so, the statusbar is updated.
+     */
     checkCollisions() {
         this.level.enemies.forEach ((enemy) => {
             if(this.character.isColliding(enemy) && !this.character.isAboveGround()) { 
@@ -75,6 +91,10 @@ class World {
     }
 
 
+    /**
+     * This function checks if character and endboss are colliding.
+     * If so, the statusbar is updated.
+     */
     checkCollisionWithEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.character.hit();
@@ -83,7 +103,10 @@ class World {
     }
 
 
-    // Check if character and bottles are colliding (> collect bottles).
+    /**
+     * This function checks if character and bottles are colliding to collect them.
+     * If so, the statusbar is updated.
+     */
     checkCollisionWithBottles() {
         this.level.collectibleBottles.forEach ((collectibleBottles) => {
             if(this.character.isColliding(collectibleBottles)) {
@@ -96,7 +119,10 @@ class World {
     }
 
 
-    // Check if character and coins are colliding (> collect coins).
+    /**
+     * This function checks if character and coins are colliding to collect them.
+     * If so, the statusbar is updated.
+     */
     checkCollisionWithCoins() {
         this.level.collectibleCoins.forEach ((collectibleCoins) => {
             if(this.character.isColliding(collectibleCoins)) {
@@ -109,7 +135,10 @@ class World {
     }
 
 
-    // Check if throwableObject and enboss are colliding. 
+    /**
+     * This function checks if throwable objects (bottle) and endboss are colliding after bottle is thrown.
+     * If so, the statusbar is updated.
+     */
     checkIfEndbossHitByBottle () {
         this.throwableObjects.forEach ((throwableObject) => {
             if(this.endboss.isColliding(throwableObject)) {
@@ -124,7 +153,9 @@ class World {
     } 
 
 
-    // Check if character and chicken/small chicken are colliding from above (> jump on chicken).
+    /**
+     * This function checks if character and chicken/small chicken are colliding after character jumps on them.
+     */
     checkJumpOnEnemy() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             const enemy = this.level.enemies[i];
@@ -142,17 +173,31 @@ class World {
     }
 
 
-    // Remove enemy from array after 3 seconds when character jumps on it.
+    /**
+     * This function removes the enemy from the array.
+     * @param {*} enemy 
+     */
     removeEnemy(enemy) {
         setTimeout(() => {
         this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-        }, 3000);
+        }, 2000);
     }
+    /*
+    removeEnemy(enemy) {
+        setTimeout(() => {
+            let i = this.level.enemies.indexOf(enemy);      
+            this.level.enemies.splice(i, 1);
+        }, 1500);
+    }
+    */
 
 
-    // draw() is used to draw the world and all objects in it like character, enemies, clouds, etc.
-    // ctx.clear() is used to clear the canvas before drawing the next frame.
-    // ctx.translate() is used to move the camera with the character on the x-axis.
+    /**
+     * This function draws the world and all objects in it like character, enemies, clouds, etc.
+     * ctx.clear() is used to clear the canvas before drawing the next frame.
+     * ctx.translate() is used to move the camera with the character on the x-axis.
+     * Draw() is called again with requestAnimationFrame() to draw the next frame.
+     */
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -172,7 +217,6 @@ class World {
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0); //
-        // Draw() is called again with requestAnimationFrame() to draw the next frame.
         let self = this;
         requestAnimationFrame(function(){
             self.draw();
@@ -180,7 +224,10 @@ class World {
     } 
 
 
-    // Add objects to map.
+    /**
+     * This function adds objects to the map.
+     * @param {*} objects 
+     */
     addObjectsToMap(objects){
         objects.forEach(o => {
             this.addToMap(o);
@@ -188,7 +235,10 @@ class World {
     }
 
 
-    // Add movable objects to map and flip image if needed.
+    /**
+     * This function adds movable objects to the map.
+     * @param {*} mo 
+     */
     addToMap(mo) { 
         if (mo.otherDirection){ 
             this.flipImage(mo);
@@ -201,9 +251,12 @@ class World {
     }
 
 
-    // Flip image horizontally (for left/right movement). 
-    // ctx.save() and ctx.restore() are used to save and restore the context if image is flipped.
-    // ctx.thanslate() is used to move the context and ctx.scale() is used to flip the context on the x-axis.
+    /**
+     * This function flips the image horizontally.
+     * ctx.save() and ctx.restore() are used to save and restore the context if image is flipped.
+     * ctx.thanslate() is used to move the context and ctx.scale() is used to flip the context on the x-axis.
+     * @param {*} mo 
+     */
     flipImage(mo){
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -212,6 +265,10 @@ class World {
     }
 
 
+    /**
+     * This function flips the image back to normal.
+     * @param {*} mo 
+     */
     flipImageBack(mo){
         mo.x = mo.x *-1;
         this.ctx.restore();

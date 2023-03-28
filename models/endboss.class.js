@@ -60,7 +60,12 @@ class Endboss extends MovableObject {
     }
 
     
-    // Endboss loses energy (hit by character's bottle).
+    /**
+     * This function is called when the endboss is hit by a bottle.
+     * It decreases the endboss' energy and checks if the endboss is dead.
+     * The lastBossHit variable is used to prevent the endboss from being hit multiple times in a short time. 
+     * @param {Array} images
+     */
     bottleHitEndboss() {
         this.bossEnergy -= this.bossEnergyLoss;
         if(this.bossEnergy <=  0) {
@@ -71,6 +76,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * This function checks if the endboss was hit.
+     * @returns {Boolean} true if the endboss was hit in the last 0.5 seconds.
+     */
     isBossHurt() {
         let timepassed = new Date().getTime() - this.lastBossHit; // Difference in ms
         timepassed = timepassed / 1000; // Difference in seconds 
@@ -78,6 +87,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * This function animates the endboss.
+     * It starts with the attacking animation and switches to the walking animation when the endboss is close to the character.
+     */
     animateEndboss() {
         let i = 0;
         setInterval(() => {
@@ -97,25 +110,48 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * This function plays the animation.
+     */
     playEndbossAnimation() {
         if (this.bossEnergy!==0 && !this.isBossHurt() && this.endbossShowdown()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
+            /*
+            } else if (this.isBossHurt()) {
+                this.playAnimation(this.IMAGES_ATTACKING);
+                this.endbossAttacking();
+            */
         } else if (this.bossEnergy<=0) {
             this.endbossDying();
         }
     }
 
+
+    /**
+     * This function checks if the endboss is close to the character.
+     * @returns {Boolean} true if the endboss is close to the character.
+     */
     endbossShowdown() {
         return world.character.x > world.level.endboss[0].x - 800;
     }
 
+
+    /**
+     * This function increases the speed of the endboss when it attacks.
+     * @returns {Number} the endboss' x position.
+     */
     endbossAttacking() {
         let attackingSpeedIncrease = world.level.endboss[0].x -= this.attackingSpeed;
         return attackingSpeedIncrease;
     }
 
+    
+    /**
+     * This function stops the game and shows the endscreen when the endboss is dead.
+     */
     endbossDying () {
+        this.playAnimation(this.IMAGES_DYING);
         setTimeout(() => {
             stopGame();
             showEndscreenWin();

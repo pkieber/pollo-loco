@@ -153,13 +153,35 @@ button:hover {
     .controller-button-container {
         display: flex;
         justify-content: space-between;
-        padding: 10px;
+    }
+
+    #overlayStory {
+        font-size: 18px;
+        padding: 10px 15px 10px 15px;
+    }
+
+    #overlayInstruction {
+        font-size: 18px;
+        padding: 10px 15px 10px 15px;
+    }
+
+    button {
+        height: 35px;
+        width: 35px;
+    }
+
+    .icons {
+        height: 15px;
     }
 }
 
 
 /* Smartphones ------- */
 @media only screen and (max-width: 720px) {
+    h1 {
+        font-size: 48px;
+    }
+
     canvas {
         width: 100%;
     }
@@ -168,9 +190,22 @@ button:hover {
         height: 100%;
         width: 100%;
     }
+
+    .mobile-none {
+        display: none;
+    }
+
+    .boss-animation {
+        top: 0;
+        left: 0;
+    }
 }
 
 @media only screen and (max-height: 480px) {
+    h1 {
+        font-size: 48px;
+    }
+    
     canvas {
         height: 100vh;
     }
@@ -178,5 +213,10 @@ button:hover {
     .start-img {
         height: 100%;
         width: 100%;
+    }
+
+    .boss-animation {
+        top: 0;
+        left: 0;
     }
 }

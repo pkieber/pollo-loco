@@ -8,19 +8,21 @@ class DrawableObject {
     width = 100;
 
 
+    /**
+     * This method loads an image from a path.
+     * @param {*} path 
+     */
     loadImage(path){
         this.img = new Image(); // this.img = document.getElementById('image') ... <img id="image" src>
         this.img.src = path;
     }
 
-    
-        /*
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-    */
 
-    
+    /**
+     * This method draws the object on the canvas and catches errors.
+     * The error is logged to the console if the image could not be loaded.
+     * @param {*} ctx 
+     */
     draw(ctx) {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -31,12 +33,17 @@ class DrawableObject {
     }
     
 
+    /**
+     * This method draws the frame of the object to help with collision detection.
+     * Only if the object is an instance of Character, Chicken or Endboss, the frame is drawn.
+     * @param {*} ctx 
+     */
     drawFrame(ctx) {
         // Canvas draw rectangle
         if(this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
             ctx.beginPath();
             // ctx.lineWidth = '5';
-            // ctx.strokeStyle = 'rgba(0,0,0,0)'; // Hilfsrahmen
+            // ctx.strokeStyle = 'rgba(0,0,0,0)';
             ctx.rect(this.x, this.y, this.width, this.height);
             // ctx.stroke();
         }
@@ -44,7 +51,7 @@ class DrawableObject {
     
 
     /**
-     * 
+     * This method loads an array of images into the image cache.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
      */
         loadImages(arr){
@@ -55,4 +62,3 @@ class DrawableObject {
             });
         }
 }
-

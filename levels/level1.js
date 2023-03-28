@@ -1,6 +1,9 @@
 let level1;
-function initLevel() {
 
+/**
+ * This function initializes the level and sets the objects for the level.
+ */
+function initLevel() {
     level1 = new level(
         [
             new Chicken(),

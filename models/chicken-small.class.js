@@ -25,12 +25,18 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * This function animates the small chickens.
+     */
     animate(){
         setStoppableInterval(() => this.moveLeft(), 1000 / 60);
         setStoppableInterval(() => this.playSmallChickenAnimation(), 200);
     }
 
 
+    /**
+     * This function plays the small chicken animation depending on the state of the chicken.
+     */
     playSmallChickenAnimation() {
         if (!this.isHit) this.playAnimation(this.IMAGES_WALKING);
             else {

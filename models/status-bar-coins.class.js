@@ -23,13 +23,21 @@ class StatusBarCoins extends DrawableObject { // see World.class.js !!
     }
 
 
+    /**
+     * This method sets the percentage of the status bar for the coins.
+     * @param {*} percentage 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
-    
+
+    /**
+     * This method is used to determine the correct image index.
+     * @returns the index of the image that should be used.
+     */
     resolveImageIndex() {
         if (this.percentage >= 5) {
             return 5;

@@ -13,16 +13,20 @@ class StatusBarBottles extends DrawableObject { // see World.class.js !!
 
 
     constructor(){
-        super(); // Methoden von übergeordneten Objekt initialisieren. 
+        super();
         this.loadImages(this.IMAGES); 
         this.x = 40;
         this.y = 100;
         this.width = 180;
         this.height = 50;
-        this.setPercentage(0); // Collect bottles to increase percentage                       
+        this.setPercentage(0);                       
     }
 
 
+    /**
+     * This method sets the percentage of the status bar for the bottles.
+     * @param {*} percentage 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
@@ -30,6 +34,10 @@ class StatusBarBottles extends DrawableObject { // see World.class.js !!
     }
 
 
+    /**
+     * This method is used to determine the correct image index.
+     * @returns the index of the image that should be used.
+     */
     resolveImageIndex() {
         if (this.percentage >= 5) {
             return 5;

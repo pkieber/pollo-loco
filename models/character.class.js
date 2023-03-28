@@ -82,12 +82,18 @@ class Character extends MovableObject{
     }
 
 
+    /**
+     * This function animates the character.
+     */
     animate(){
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
         setStoppableInterval(() => this.playCharacterAnimation(), 100);
     }
 
 
+    /**
+     * This function moves the character in the game based on the key pressed.
+     */
     moveCharacter(){
         this.walking_sound.pause();
         if (!this.mute) {
@@ -113,13 +119,16 @@ class Character extends MovableObject{
     }
 
 
+    /**
+     * This function plays the correct animation of the character based on the condition.
+     */
     playCharacterAnimation(){
         if (this.isDead()){
             this.playAnimation(this.IMAGES_DEAD);
             if (!this.mute) this.death_sound.play();
             setTimeout(() => {
                 stopGame();
-                showEndscreenLost(); // Character is dead, show "You Lost!"-endscreen.
+                showEndscreenLost();
             }, 2000);
         } else if (this.isHurt()){ 
                 this.playAnimation(this.IMAGES_HURT);
@@ -134,16 +143,28 @@ class Character extends MovableObject{
     }
 
 
+    /**
+     * This function checks if the character can move right.
+     * @returns 
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
 
+    /**
+     * This function checks if the character can move left. 
+     * @returns 
+     */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
 
+    /**
+     * This function checks if the character can jump.
+     * @returns
+     */
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }

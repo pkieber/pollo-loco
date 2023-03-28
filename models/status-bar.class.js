@@ -23,6 +23,10 @@ class StatusBarCharacter  extends DrawableObject { // see World.class.js !!
     }
 
 
+    /**
+     * This method sets the percentage of the health bar for the character.
+     * @param {*} percentage 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
@@ -30,6 +34,10 @@ class StatusBarCharacter  extends DrawableObject { // see World.class.js !!
     }
 
     
+    /**
+     * This method is used to determine the correct image index.
+     * @returns the index of the image that should be used.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

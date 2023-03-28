@@ -30,13 +30,9 @@
 </head>
 
 <body>
-
     <h1>El Pollo Loco</h1>
-
     <div id="fullscreen" class="fullscreen-display">
-
         <canvas id="canvas" class="canvas d-none" width="720px" height="480px"></canvas>
-        
         <div class="start-screen">
             <img id="startscreen" class="start-img" src="./img/9_intro_outro_screens/start/startscreen_1.png">
             <img id="endscreen" class="start-img d-none" src="./img/5_background/second_half_background.png">
@@ -63,14 +59,12 @@
             <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.svg"></button>
             <button id="story" title="Story" onclick="showStory()"><img class="icons" src="./img/quote.bubble.svg"></button>
             <div id="screenBtn" class="d-none">
-                <button id="fullscreen" title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
+                <button class="mobile-none" id="fullscreen" title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
                 <button id = "mute" title="Sound Off" onclick="soundOff()"><img class="icons" src="./img/speaker.slash.fill.svg"></button>
                 <button id = "unmute" title="Sound On" onclick="soundOn()" class="d-none"><img class="icons" src="./img/speaker.fill.svg"></button>
             </div>
             <button id= "startBtn" title="Start Game" onclick="startGame()"><img class="icons" src="./img/play.svg"></button>
-            <!-- <button class="d-none" title="Stop Game" onclick="stopGame()"><img class="icons" src="./img/play.slash.fill.svg"></button> -->
         </div>
-
         <div id="controller" class="controller-button-container">
             <div class="panel">
                 <button id="btnLeft" title="Move Left"><img class="icons" src="./img/arrow.left.svg"></button>
@@ -81,8 +75,6 @@
                 <button id="btnThrow" title="Throw"><img class="icons" src="./img/arrow.turn.up.right.svg"></button>
             </div>
         </div>
-
     </div>
-    
 </body>
 </html>

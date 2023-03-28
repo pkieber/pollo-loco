@@ -3,7 +3,10 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 
-
+/**
+ * This function starts the game.
+ * It hides the startscreen and shows the canvas.
+ */
 function startGame() {
     initLevel();
     document.getElementById('startscreen').classList.add('d-none');
@@ -17,24 +20,37 @@ function startGame() {
 }
 
 
+/**
+ * This function reloads the page.
+ */
 function restart() {
     location.reload();
 }
 
 
-// Function to stop all intervals
+/**
+ * This function stops all intervals.
+ * @param {*} fn 
+ * @param {*} time 
+ */
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
 }
 
 
+/**
+ * This function stops the game and clears the interval ids.
+ */
 function stopGame() {
     intervalIds.forEach(clearInterval);
     document.getElementById('screenBtn').classList.add('d-none');
 }
 
 
+/**
+ * This function shows the "Winner"-endscreen.
+ */
 function showEndscreenWin() {
     document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenWin').classList.remove('d-none');
@@ -47,6 +63,9 @@ function showEndscreenWin() {
 }
 
 
+/**
+ * This function shows the "Loser"-endscreen when the player loses.
+ */
 function showEndscreenLost() {
     document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenLost').classList.remove('d-none');
@@ -58,17 +77,25 @@ function showEndscreenLost() {
 }
 
 
-// Show and hide instructions
+/**
+ * This function shows the instructions.
+ */
 function showInstructions() {
     document.getElementById("overlayInstruction").style.display = "block";
 }
 
 
+/**
+ * This function hides the instructions.
+ */
 function hideInstructions() {
     document.getElementById("overlayInstruction").style.display = "none";
 }
 
 
+/**
+ * This function makes the instructions overlay disappear when clicking outside of it.
+ */
 window.addEventListener("click", function(event) {
     if (event.target == document.getElementById("overlayInstruction")) {
         hideInstructions();
@@ -79,18 +106,25 @@ window.addEventListener("click", function(event) {
 });
 
 
-// Show and hide story
+/**
+ * This function shows the intro story of the game.
+ */
 function showStory() {
     document.getElementById("overlayStory").style.display = "block";
 }
 
 
+/**
+ * This function hides the intro story of the game.
+ */
 function hideStory() {
     document.getElementById("overlayStory").style.display = "none";
 }
 
 
-// Mute and unmute background sound
+/**
+ * This function mutes the sound.
+ */
 function soundOff() {
     if (!world.character.mute) {
     document.getElementById("mute").classList.add('d-none');
@@ -100,6 +134,9 @@ function soundOff() {
 }
 
 
+/**
+ * This function unmutes the sound.
+ */
 function soundOn() {
     if (world.character.mute) {
     document.getElementById("mute").classList.remove('d-none');
@@ -109,7 +146,9 @@ function soundOn() {
 } 
 
 
-// Fullscreen Mode
+/**
+ * This function opens the game in fullscreen mode.
+ */
 function openFullscreen() {
     if (canvas.requestFullscreen) {
         canvas.requestFullscreen();
@@ -123,7 +162,9 @@ function openFullscreen() {
 }    
 
 
-// Taste drücken
+/**
+ * This function sets the event listeners (keydown) for the buttons in the panel.
+ */
 window.addEventListener('keydown', (e) => {
     if(e.keyCode == 39){
         keyboard.RIGHT = true;
@@ -147,7 +188,9 @@ window.addEventListener('keydown', (e) => {
 });
 
 
-// Taste loslassen
+/**
+ * This function sets the event listeners (keyup) for the buttons in the panel.
+ */
 window.addEventListener('keyup', (e) => {
     if(e.keyCode == 39){
         keyboard.RIGHT = false;
@@ -171,7 +214,9 @@ window.addEventListener('keyup', (e) => {
 });
 
 
-// Mobile control panel
+/**
+ * This function sets the event listeners (touchstart/touchend) for the mobile control panel.
+ */
 function btnPanelPressEvents() {
     document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
         e.preventDefault();
