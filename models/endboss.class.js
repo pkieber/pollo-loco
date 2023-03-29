@@ -3,9 +3,6 @@ class Endboss extends MovableObject {
     width = 340;
     y = 50;
     isBossHit = false;
-    bossEnergy = 100;
-    bossEnergyLoss = 25;
-    lastBossHit = 0;
     intervalIds = [];
 
 
@@ -59,33 +56,6 @@ class Endboss extends MovableObject {
         this.animateEndboss();            
     }
 
-    
-    /**
-     * This function is called when the endboss is hit by a bottle.
-     * It decreases the endboss' energy and checks if the endboss is dead.
-     * The lastBossHit variable is used to prevent the endboss from being hit multiple times in a short time. 
-     * @param {Array} images
-     */
-    bottleHitEndboss() {
-        this.bossEnergy -= this.bossEnergyLoss;
-        if(this.bossEnergy <=  0) {
-            this.bossEnergy = 0;
-        } else {
-            this.lastBossHit = new Date().getTime();
-        }
-    }
-
-
-    /**
-     * This function checks if the endboss was hit.
-     * @returns {Boolean} true if the endboss was hit in the last 0.5 seconds.
-     */
-    isBossHurt() {
-        let timepassed = new Date().getTime() - this.lastBossHit; // Difference in ms
-        timepassed = timepassed / 1000; // Difference in seconds 
-        return timepassed < 0.5;
-    }
-
 
     /**
      * This function animates the endboss.
@@ -114,13 +84,13 @@ class Endboss extends MovableObject {
      * This function plays the animation.
      */
     playEndbossAnimation() {
-        if (this.bossEnergy!==0 && !this.isBossHurt() && this.endbossShowdown()) {
+        if (this.energy!==0 && !this.isHurt() && this.endbossShowdown()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
-        } else if (this.isBossHurt()) {
+        } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_ATTACKING);
             this.endbossAttacking();
-        } else if (this.bossEnergy<=0) {
+        } else if (this.energy<=0) {
             this.endbossDying();
         }
     }

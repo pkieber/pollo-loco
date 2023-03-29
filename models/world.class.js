@@ -152,11 +152,11 @@ class World {
     checkIfEndbossHitByBottle () {
         this.throwableObjects.forEach ((throwableObject) => {
             if(this.endboss.isColliding(throwableObject) && !this.endbossIsHurt) {
-                this.endboss.bottleHitEndboss();
+                this.endboss.hit();
                 this.endbossIsHurt = true;
                 if (!world.character.mute) this.smashchicken_sound.play();
-                this.statusBarEndboss.setPercentage(this.endboss.bossEnergy);
-                console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
+                this.statusBarEndboss.setPercentage(this.endboss.energy -=20);
+                console.log('Collision with Endboss, Energy ', this.endboss.energy);
                 setTimeout(() => {
                     this.endbossIsHurt = false;
                 }, 1000);
@@ -271,7 +271,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        //mo.drawFrame(this.ctx);
         if (mo.otherDirection){
             this.flipImageBack(mo);
         }

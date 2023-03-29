@@ -149,6 +149,11 @@ button:hover {
 
 /* iPads ------- */
 @media only screen and (max-width: 800px) {
+    body {
+        background-position: unset;
+        background-size: unset;
+    }
+
     .controller-button-container {
         display: flex;
         justify-content: space-between;

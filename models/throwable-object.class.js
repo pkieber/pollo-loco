@@ -39,15 +39,15 @@ class ThrowableObject extends MovableObject {
      * After a certain time the object will splash.
      */
     throw() {
-        this.speedY = 30;
+        this.speedY = 25;
         this.applyGravity();
         if (!world.character.mute) this.throw_sound.play();
         setStoppableInterval(() => {
-            this.x += 10;
+            this.x += 20;
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
             setTimeout(() => {
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-            }, 1100);
+            }, 900);
         }, 50);
     }
 }

@@ -36,18 +36,18 @@ class DrawableObject {
     /**
      * This method draws the frame of the object to help with collision detection.
      * Only if the object is an instance of Character, Chicken or Endboss, the frame is drawn.
-     * @param {*} ctx 
      */
+    /*
     drawFrame(ctx) {
-        // Canvas draw rectangle
-        if(this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+        if(this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss) {
             ctx.beginPath();
-            // ctx.lineWidth = '5';
-            // ctx.strokeStyle = 'rgba(0,0,0,0)';
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'rgba(0,128,0)';
             ctx.rect(this.x, this.y, this.width, this.height);
-            // ctx.stroke();
+            ctx.stroke();
         }
     }
+    */
     
 
     /**

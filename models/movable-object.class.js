@@ -6,7 +6,6 @@ class MovableObject extends DrawableObject{
     coin = 0; // coin counter
     bottle = 0; // bottle counter
     energy = 100;
-    energyLoss = 2; 
     lastHit = 0;
     /**
      * Offset is used to adjust the collision detection variables.
@@ -81,8 +80,8 @@ class MovableObject extends DrawableObject{
      * It reduces the character's energy when it is hit by an enemy.
      */
     hit() {
-        this.energy -=this.energyLoss;
-        if(this.energy <=  0) {
+        this.energy -= 5;
+        if(this.energy <= 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
