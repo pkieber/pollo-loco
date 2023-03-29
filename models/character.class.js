@@ -124,12 +124,7 @@ class Character extends MovableObject{
      */
     playCharacterAnimation(){
         if (this.isDead()){
-            this.playAnimation(this.IMAGES_DEAD);
-            if (!this.mute) this.death_sound.play();
-            setTimeout(() => {
-                stopGame();
-                showEndscreenLost();
-            }, 2000);
+            this.playCharacterDeadAnimation();
         } else if (this.isHurt()){ 
                 this.playAnimation(this.IMAGES_HURT);
                 if (!this.mute) this.pain_sound.play();
@@ -140,6 +135,20 @@ class Character extends MovableObject{
         } else {
             this.playAnimation(this.IMAGES_IDLE);
         }
+    }
+
+
+    /**
+     * This function is called when character is dead.
+     */
+    playCharacterDeadAnimation() {
+        this.playAnimation(this.IMAGES_DEAD);
+            if (!this.mute) this.death_sound.play();
+            setTimeout(() => {
+                stopGame();
+                closeFullscreen();
+                showEndscreenLost();
+            }, 2000);
     }
 
 

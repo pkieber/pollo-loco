@@ -44,7 +44,6 @@ function setStoppableInterval(fn, time) {
  */
 function stopGame() {
     intervalIds.forEach(clearInterval);
-    document.getElementById('screenBtn').classList.add('d-none');
 }
 
 
@@ -54,6 +53,7 @@ function stopGame() {
 function showEndscreenWin() {
     document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenWin').classList.remove('d-none');
+    document.getElementById('screenBtn').classList.add('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
     document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
@@ -69,6 +69,7 @@ function showEndscreenWin() {
 function showEndscreenLost() {
     document.getElementById('endscreen').classList.remove('d-none');
     document.getElementById('endscreenLost').classList.remove('d-none');
+    document.getElementById('screenBtn').classList.add('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
     document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
@@ -160,6 +161,24 @@ function openFullscreen() {
         canvas.msRequestFullscreen();
     }
 }    
+
+
+/**
+ * This function closes the game from fullscreen mode.
+ */
+function closeFullscreen() {
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+    }
+}
 
 
 /**

@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     y = 50;
     isBossHit = false;
     bossEnergy = 100;
-    bossEnergyLoss = 12.5;
+    bossEnergyLoss = 25;
     lastBossHit = 0;
     intervalIds = [];
 
@@ -117,11 +117,9 @@ class Endboss extends MovableObject {
         if (this.bossEnergy!==0 && !this.isBossHurt() && this.endbossShowdown()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
-            /*
-            } else if (this.isBossHurt()) {
-                this.playAnimation(this.IMAGES_ATTACKING);
-                this.endbossAttacking();
-            */
+        } else if (this.isBossHurt()) {
+            this.playAnimation(this.IMAGES_ATTACKING);
+            this.endbossAttacking();
         } else if (this.bossEnergy<=0) {
             this.endbossDying();
         }
@@ -152,8 +150,9 @@ class Endboss extends MovableObject {
      */
     endbossDying () {
         this.playAnimation(this.IMAGES_DYING);
+        stopGame();
         setTimeout(() => {
-            stopGame();
+            closeFullscreen();
             showEndscreenWin();
             if (!world.character.mute) this.win_sound.play();
             soundOff();

@@ -11,6 +11,8 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
+    characterIsHurt = false;
+    endbossIsHurt = false;
 
 
     smashchicken_sound = new Audio('audio/smashchicken.mp3');
@@ -82,10 +84,14 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach ((enemy) => {
-            if(this.character.isColliding(enemy) && !this.character.isAboveGround()) { 
+            if(this.character.isColliding(enemy) && !this.character.isAboveGround() && !this.characterIsHurt) { 
                 this.character.hit();
+                this.characterIsHurt = true;
                 this.statusBar.setPercentage(this.character.energy);
                 //console.log('Collision with Character, energy ', this.character.energy);
+                setTimeout(() => {
+                    this.characterIsHurt = false;
+                }, 1000);
             }
         });
     }
@@ -96,9 +102,13 @@ class World {
      * If so, the statusbar is updated.
      */
     checkCollisionWithEndboss() {
-        if (this.character.isColliding(this.endboss)) {
+        if (this.character.isColliding(this.endboss) && !this.characterIsHurt) {
             this.character.hit();
+            this.characterIsHurt = true;
             this.statusBar.setPercentage(this.character.energy);
+            setTimeout(() => {
+                this.characterIsHurt = false;
+            }, 1000);
         }
     }
 
@@ -141,13 +151,15 @@ class World {
      */
     checkIfEndbossHitByBottle () {
         this.throwableObjects.forEach ((throwableObject) => {
-            if(this.endboss.isColliding(throwableObject)) {
-            this.endboss.bottleHitEndboss();
-            this.endboss.isHit = true; // TEST //////////////////
-            //if (!world.character.mute) this.bottlesplash_sound.play();
-            if (!world.character.mute) this.smashchicken_sound.play();
-            this.statusBarEndboss.setPercentage(this.endboss.bossEnergy);
-            console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
+            if(this.endboss.isColliding(throwableObject) && !this.endbossIsHurt) {
+                this.endboss.bottleHitEndboss();
+                this.endbossIsHurt = true;
+                if (!world.character.mute) this.smashchicken_sound.play();
+                this.statusBarEndboss.setPercentage(this.endboss.bossEnergy);
+                console.log('Collision with Endboss, bossEnergy ', this.endboss.bossEnergy);
+                setTimeout(() => {
+                    this.endbossIsHurt = false;
+                }, 1000);
             } 
         }); 
     } 
@@ -161,10 +173,10 @@ class World {
             const enemy = this.level.enemies[i];
             if (
                 this.character.isColliding(enemy) &&
-                this.character.isAboveGround()
+                this.character.isAboveGround() &&
+                !this.character.isHurt()
             ) {
             let crushedChicken = this.level.enemies.indexOf(enemy);
-            //if (!world.character.mute) this.smashchicken_sound.play();
             this.level.enemies[crushedChicken].isHit = true;
             console.log("CHICKEN CRUSHED", crushedChicken);
             this.removeEnemy(enemy);
@@ -180,7 +192,7 @@ class World {
     removeEnemy(enemy) {
         setTimeout(() => {
         this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-        }, 2000);
+        }, 500);
     }
     /*
     removeEnemy(enemy) {
@@ -203,25 +215,40 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
-        // ------ Space for fixed objects --------
+        this.addStatusBars();
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjects();
+        this.ctx.translate(-this.camera_x, 0);
+        let self = this;
+        requestAnimationFrame(function(){
+            self.draw();
+        });
+    } 
+
+
+    /**
+     * This function draws status bars on the map. 
+     */
+    addStatusBars(){
         this.addToMap(this.statusBar);   
         this.addToMap(this.statusBarBottles);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarEndboss);
-        this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
+    }
+
+
+    /**
+     * This function draws objects on the map. 
+     */
+    addObjects(){
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.collectibleCoins); // ?
         this.addObjectsToMap(this.level.collectibleBottles);// ?
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
-        this.ctx.translate(-this.camera_x, 0); //
-        let self = this;
-        requestAnimationFrame(function(){
-            self.draw();
-        });
-    } 
+    }
 
 
     /**
