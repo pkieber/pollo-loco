@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 
+
 /**
  * This function starts the game.
  * It hides the startscreen and shows the canvas.
@@ -49,6 +50,7 @@ function stopGame() {
 
 /**
  * This function shows the "Winner"-endscreen.
+ * Icons or titles are replaced on-click.
  */
 function showEndscreenWin() {
     document.getElementById('endscreen').classList.remove('d-none');
@@ -56,15 +58,15 @@ function showEndscreenWin() {
     document.getElementById('screenBtn').classList.add('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
-    document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
-    document.getElementById('startBtn').setAttribute('title', 'Play again'); // Change button title from 'Start Game' to 'Play again'
+    document.querySelector('#startBtn img').src = './img/repeat.svg';
+    document.getElementById('startBtn').setAttribute('title', 'Play again');
     document.getElementById('startBtn').setAttribute('onclick', 'restart()');
-    document.getElementById('endscreenBossDead').classList.remove('d-none');
 }
 
 
 /**
  * This function shows the "Loser"-endscreen when the player loses.
+ * Icons or titles are replaced on-click.
  */
 function showEndscreenLost() {
     document.getElementById('endscreen').classList.remove('d-none');
@@ -72,8 +74,8 @@ function showEndscreenLost() {
     document.getElementById('screenBtn').classList.add('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startBtn').classList.remove('d-none');
-    document.querySelector('#startBtn img').src = './img/repeat.svg'; // Replaces button 'start' icon with 'repeat' icon
-    document.getElementById('startBtn').setAttribute('title', 'Play again'); // Change button title from 'Start Game' to 'Play again'
+    document.querySelector('#startBtn img').src = './img/repeat.svg';
+    document.getElementById('startBtn').setAttribute('title', 'Play again');
     document.getElementById('startBtn').setAttribute('onclick', 'restart()');
 }
 
@@ -95,19 +97,6 @@ function hideInstructions() {
 
 
 /**
- * This function makes the instructions overlay disappear when clicking outside of it.
- */
-window.addEventListener("click", function(event) {
-    if (event.target == document.getElementById("overlayInstruction")) {
-        hideInstructions();
-    }
-    if (event.target == document.getElementById("overlayStory")) {
-        hideStory();
-    }   
-});
-
-
-/**
  * This function shows the intro story of the game.
  */
 function showStory() {
@@ -121,6 +110,45 @@ function showStory() {
 function hideStory() {
     document.getElementById("overlayStory").style.display = "none";
 }
+
+
+/**
+ * Function to advice user to switch to landscape mode.
+ */
+function handleOrientationChange() {
+    let landscapeMessage = document.getElementById("landscapeMessage");
+    if (window.innerHeight > window.innerWidth) {
+        // Show the message if in portrait mode
+        landscapeMessage.style.display = "block";
+    } else {
+        // Hide the message if in landscape mode
+        landscapeMessage.style.display = "none";
+    }
+}
+
+
+/**
+ * This function hides the intro story of the game.
+ */
+function hideMessage() {
+    document.getElementById("landscapeMessage").style.display = "none";
+}
+
+
+/**
+ * This function makes the instructions overlay disappear when clicking outside of it.
+ */
+window.addEventListener("click", function(event) {
+    if (event.target == document.getElementById("overlayInstruction")) {
+        hideInstructions();
+    }
+    if (event.target == document.getElementById("overlayStory")) {
+        hideStory();
+    }
+    if (event.target == document.getElementById("landscapeMessage")) {
+        hideMessage();
+    }
+});
 
 
 /**

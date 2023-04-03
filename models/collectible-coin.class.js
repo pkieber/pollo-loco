@@ -7,6 +7,12 @@ class CollectibleCoin extends MovableObject {
 
     height = 120;
     width = 120;
+    offset = {
+        top: 0,
+        left: 20,
+        right: 20,
+        bottom: 0
+    };
 
 
     constructor(x, y) {

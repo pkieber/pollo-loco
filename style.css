@@ -28,6 +28,7 @@ canvas {
     background-color: black;
     display: block;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
 
 .start-screen {
@@ -38,15 +39,9 @@ canvas {
     height: 480px;
     width: 720px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
 
-.boss-animation {
-    position: absolute;
-    left: 25%;
-    top: 20%;
-    height: 300px;
-    width: 350px;
-}
 
 #endscreenWin {
     position: absolute;
@@ -63,12 +58,13 @@ canvas {
 
 #overlayInstruction {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(246, 206, 73);
     padding: 30px 30px 10px 30px;    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
     z-index: 9999;
     display: none;
     cursor: pointer;
@@ -78,12 +74,13 @@ canvas {
 
 #overlayStory {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(246, 206, 73);
     padding: 30px 30px 10px 30px;    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
     z-index: 9999;
     display: none;
     cursor: pointer;
@@ -146,9 +143,29 @@ button:hover {
     display: none;
 }
 
+#landscapeMessage {
+    display: none;
+}
+
 
 /* iPads ------- */
 @media only screen and (max-width: 800px) {
+    #landscapeMessage {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(246, 206, 73);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        font-size: 20px;
+        opacity: 0.9;
+        display: unset;
+        cursor: pointer;
+    }    
+
     body {
         background-position: unset;
         background-size: unset;

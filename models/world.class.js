@@ -5,7 +5,7 @@ class World {
     canvas;
     ctx;
     keyboard;
-    camera_x = 0; // Camera starts at position 0 on the x-axis (and moves with the character).
+    camera_x = 0;
     statusBar = new StatusBarCharacter();
     statusBarEndboss = new statusBarEndboss();
     statusBarCoins = new StatusBarCoins();
@@ -43,14 +43,16 @@ class World {
      */
     run() {
         setInterval(() => {
-            this.checkCollisions();
-            this.checkCollisionWithEndboss()
+            this.checkCollisionWithCoins();
             this.checkCollisionWithBottles();
-            this.checkCollisionWithCoins(); 
+            this.checkJumpOnEnemy();
+        }, 50)
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkCollisionWithEndboss();
             this.checkThrownObjects();
             this.checkIfEndbossHitByBottle();
-            this.checkJumpOnEnemy();
-        }, 200);
+        }, 200)
     }
 
 
@@ -102,7 +104,7 @@ class World {
      * If so, the statusbar is updated.
      */
     checkCollisionWithEndboss() {
-        if (this.character.isColliding(this.endboss) && !this.characterIsHurt) {
+        if (this.character.isColliding(this.endboss)) {
             this.character.hit();
             this.characterIsHurt = true;
             this.statusBar.setPercentage(this.character.energy);
@@ -118,12 +120,12 @@ class World {
      * If so, the statusbar is updated.
      */
     checkCollisionWithBottles() {
-        this.level.collectibleBottles.forEach ((collectibleBottles) => {
-            if(this.character.isColliding(collectibleBottles)) {
+        this.level.collectibleBottles.forEach ((bottle) => {
+            if(this.character.isColliding(bottle)) {
                 this.character.collectBottle();
                 this.statusBarBottles.setPercentage(this.character.bottle);
                 //console.log('Collected BOTTLES ', this.character.bottle);
-                this.level.collectibleBottles.splice(this.level.collectibleBottles.indexOf(collectibleBottles), 1);
+                this.level.collectibleBottles.splice(this.level.collectibleBottles.indexOf(bottle), 1);
             }
         });
     }
@@ -134,12 +136,12 @@ class World {
      * If so, the statusbar is updated.
      */
     checkCollisionWithCoins() {
-        this.level.collectibleCoins.forEach ((collectibleCoins) => {
-            if(this.character.isColliding(collectibleCoins)) {
+        this.level.collectibleCoins.forEach ((coin) => {
+            if(this.character.isColliding(coin)) {
                 this.character.collectCoin();
                 this.statusBarCoins.setPercentage(this.character.coin);
                 //console.log('Collected COINS ', this.character.coin);
-                this.level.collectibleCoins.splice(this.level.collectibleCoins.indexOf(collectibleCoins), 1);
+                this.level.collectibleCoins.splice(this.level.collectibleCoins.indexOf(coin), 1);
             }
         });
     }
@@ -149,20 +151,21 @@ class World {
      * This function checks if throwable objects (bottle) and endboss are colliding after bottle is thrown.
      * If so, the statusbar is updated.
      */
-    checkIfEndbossHitByBottle () {
-        this.throwableObjects.forEach ((throwableObject) => {
-            if(this.endboss.isColliding(throwableObject) && !this.endbossIsHurt) {
-                this.endboss.hit();
+    checkIfEndbossHitByBottle() {
+        this.throwableObjects.forEach((throwableObject) => {
+            if (this.endboss.isColliding(throwableObject)) {
+                this.endboss.hit(this.endboss.energy -= 20);
                 this.endbossIsHurt = true;
                 if (!world.character.mute) this.smashchicken_sound.play();
-                this.statusBarEndboss.setPercentage(this.endboss.energy -=20);
-                console.log('Collision with Endboss, Energy ', this.endboss.energy);
+                this.statusBarEndboss.setPercentage(this.endboss.energy);
+                //console.log('Collision with Endboss, Energy ', this.endboss.energy);
+                this.throwableObjects.splice(this.throwableObjects, 1);
                 setTimeout(() => {
                     this.endbossIsHurt = false;
                 }, 1000);
-            } 
-        }); 
-    } 
+            }
+        })
+    }
 
 
     /**
@@ -172,36 +175,28 @@ class World {
         for (let i = 0; i < this.level.enemies.length; i++) {
             const enemy = this.level.enemies[i];
             if (
-                this.character.isColliding(enemy) &&
-                this.character.isAboveGround() &&
-                !this.character.isHurt()
+                this.character.isColliding(enemy) && this.character.isAboveGround() && !this.character.isHurt()
             ) {
-            let crushedChicken = this.level.enemies.indexOf(enemy);
-            this.level.enemies[crushedChicken].isHit = true;
-            console.log("CHICKEN CRUSHED", crushedChicken);
-            this.removeEnemy(enemy);
+                enemy.isHit = true;
+                this.removeEnemy(enemy);
+                //console.log("CHICKEN CRUSHED", crushedChicken);
             }
         }
     }
 
 
     /**
-     * This function removes the enemy from the array.
+     * This function removes the enemy from the array after being killed.
      * @param {*} enemy 
      */
     removeEnemy(enemy) {
         setTimeout(() => {
-        this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-        }, 500);
+            const index = this.level.enemies.indexOf(enemy);
+            if (index > -1) {
+                this.level.enemies.splice(index, 1);
+            }
+        }, 300);
     }
-    /*
-    removeEnemy(enemy) {
-        setTimeout(() => {
-            let i = this.level.enemies.indexOf(enemy);      
-            this.level.enemies.splice(i, 1);
-        }, 1500);
-    }
-    */
 
 
     /**
@@ -218,6 +213,7 @@ class World {
         this.addStatusBars();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
+        this.addToMap(this.endboss);
         this.addObjects();
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
@@ -246,7 +242,6 @@ class World {
         this.addObjectsToMap(this.level.collectibleCoins); // ?
         this.addObjectsToMap(this.level.collectibleBottles);// ?
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
     }
 

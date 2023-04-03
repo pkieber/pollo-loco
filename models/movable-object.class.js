@@ -10,13 +10,11 @@ class MovableObject extends DrawableObject{
     /**
      * Offset is used to adjust the collision detection variables.
      */
-    //offsetY = 100;
-    //offsetX = 0;
     offset = {
-        top: -20,
+        top: 0,
         bottom: 0,
-        left: 10,
-        right: 10
+        left: 0,
+        right: 0
     }
 
 
@@ -65,16 +63,8 @@ class MovableObject extends DrawableObject{
         (this.x + this.offset.left < mo.x + mo.width - mo.offset.right) && // left to right collision
         (this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom); // bottom to top collision
     }  
-    /*
-    isColliding(mo) {
-        return  (this.x + this.width + this.offsetX) >= mo.x && this.x <= (mo.x + mo.width) && 
-                (this.y + this.offsetY + this.height) >= mo.y &&
-                (this.y + this.offsetY) <= (mo.y + mo.height); 
-                //mo.onCollisionCourse;
-    }
-    */
 
-
+    
     /**
      * This function is called when the character is hit by an enemy.
      * It reduces the character's energy when it is hit by an enemy.

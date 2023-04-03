@@ -1,7 +1,7 @@
 class Cloud extends MovableObject{
-    y = 20;         // vertikal
-    width = 500;    // Diese Werte bleiben konstant, deshalb nicht in constructor() als dynamisch definieren
-    height = 250;   // Diese Werte bleiben konstant, deshalb nicht in constructor() als dynamisch definieren
+    y = 20;     
+    width = 500; 
+    height = 250;
     
     
     constructor(){

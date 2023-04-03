@@ -1,10 +1,10 @@
 class statusBarEndboss extends DrawableObject {
     IMAGES = [
-        './img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png', // 0 = Zero Energy
+        './img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png', // 0 = 0% energy
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/20.png',
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/40.png',
         './img/7_statusbars/1_statusbar/2_statusbar_health/orange/80.png',
-        './img/7_statusbars/1_statusbar/2_statusbar_health/orange/100.png', // 4 = Full Energy
+        './img/7_statusbars/1_statusbar/2_statusbar_health/orange/100.png', // 4 = 100% energy
     ];
 
 

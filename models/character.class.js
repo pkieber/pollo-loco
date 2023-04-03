@@ -4,6 +4,14 @@ class Character extends MovableObject{
     y = 130;
     speed = 10;
     mute = false;
+    /*
+    offset = {
+        top: 120,
+        bottom: 30,
+        left: 20,
+        right: 20,
+    };
+    */
 
 
     IMAGES_WALKING = [
@@ -48,17 +56,7 @@ class Character extends MovableObject{
         './img/2_character_pepe/1_idle/idle/I-7.png',
         './img/2_character_pepe/1_idle/idle/I-8.png',
         './img/2_character_pepe/1_idle/idle/I-9.png',
-        './img/2_character_pepe/1_idle/idle/I-10.png',
-        './img/2_character_pepe/1_idle/long_idle/I-11.png',
-        './img/2_character_pepe/1_idle/long_idle/I-12.png',
-        './img/2_character_pepe/1_idle/long_idle/I-13.png',
-        './img/2_character_pepe/1_idle/long_idle/I-14.png',
-        './img/2_character_pepe/1_idle/long_idle/I-15.png',
-        './img/2_character_pepe/1_idle/long_idle/I-16.png',
-        './img/2_character_pepe/1_idle/long_idle/I-17.png',
-        './img/2_character_pepe/1_idle/long_idle/I-18.png',
-        './img/2_character_pepe/1_idle/long_idle/I-19.png',
-        './img/2_character_pepe/1_idle/long_idle/I-20.png'
+        './img/2_character_pepe/1_idle/idle/I-10.png'
     ]
 
 

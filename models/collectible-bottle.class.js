@@ -7,6 +7,12 @@ class CollectibleBottle extends MovableObject {
 
     height = 60;
     width = 50;
+    offset = {
+        top: 0,
+        left: 20,
+        right: 20,
+        bottom: 0
+    };
     
     
     constructor(x, y) {
