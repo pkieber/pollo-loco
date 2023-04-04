@@ -18,8 +18,8 @@ class MovableObject extends DrawableObject{
     }
 
 
-    collectcoin_sound = new Audio('audio/collectbottle.mp3');
-    collectbottle_sound = new Audio('audio/collectcoin.mp3');
+    collectcoin_sound = new Audio('audio/collect_bottle.mp3');
+    collectbottle_sound = new Audio('audio/collect_coin.mp3');
     
 
     /**
@@ -68,9 +68,10 @@ class MovableObject extends DrawableObject{
     /**
      * Called when the character is hit by an enemy.
      * Reduces the character's energy when it is hit by an enemy.
+     * Endboss has additional energy loss. 
      */
     hit() {
-        this.energy -= 5;
+        this.energy -= 20;
         if(this.energy <= 0) {
             this.energy = 0;
         } else {

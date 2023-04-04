@@ -21,7 +21,8 @@ class DrawableObject {
     /**
      * Draws the object on the canvas and catches errors.
      * The error is logged to the console if the image could not be loaded.
-     * @param {*} ctx 
+     * @param {CanvasRenderingContext2D} ctx 
+     * CanvasRenderingContext2D interface provides 2D rendering context for the drawing surface of a canvas element.
      */
     draw(ctx) {
         try {

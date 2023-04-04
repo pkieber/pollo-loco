@@ -25,8 +25,8 @@ class SmallChicken extends MovableObject {
         super().loadImage('./img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING); 
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 500 + Math.random() * 1500;
-        this.speed = 0.25 + Math.random() * 0.25; 
+        this.x = 500 + Math.random() * 2000;
+        this.speed = 0.75 + Math.random() * 0.25; 
         this.animate();
     }
 
@@ -48,6 +48,7 @@ class SmallChicken extends MovableObject {
             else {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
+                this.y = 430;
             }
     }        
 }

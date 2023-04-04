@@ -4,14 +4,12 @@ class Character extends MovableObject{
     y = 130;
     speed = 10;
     mute = false;
-    /*
     offset = {
         top: 120,
         bottom: 30,
         left: 20,
         right: 20,
     };
-    */
 
 
     IMAGES_WALKING = [
@@ -152,7 +150,7 @@ class Character extends MovableObject{
 
     /**
      * Checks if the character can move right.
-     * @returns 
+     * @returns
      */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;

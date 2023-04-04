@@ -15,10 +15,16 @@ class World {
     endbossIsHurt = false;
 
 
-    smashchicken_sound = new Audio('audio/smashchicken.mp3');
-    bottlesplash_sound = new Audio('audio/bottlesplash.mp3');
+    smashchicken_sound = new Audio('audio/smash_chicken.mp3');
+    smashendboss_sound = new Audio('audio/pollo_loco.mp3');
+    bottlesplash_sound = new Audio('audio/bottle_splash.mp3');
 
 
+    /**
+     * <canvas> element is used to draw graphics and animations. 
+     * @param {*} canvas 
+     * @param {*} keyboard 
+     */
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -154,9 +160,9 @@ class World {
     checkIfEndbossHitByBottle() {
         this.throwableObjects.forEach((throwableObject) => {
             if (this.endboss.isColliding(throwableObject)) {
-                this.endboss.hit(this.endboss.energy -= 20);
+                this.endboss.hit(this.endboss.energy -= 5);
                 this.endbossIsHurt = true;
-                if (!world.character.mute) this.smashchicken_sound.play();
+                if (!world.character.mute) this.smashendboss_sound.play();
                 this.statusBarEndboss.setPercentage(this.endboss.energy);
                 //console.log('Collision with Endboss, Energy ', this.endboss.energy);
                 this.throwableObjects.splice(this.throwableObjects, 1);
@@ -178,6 +184,7 @@ class World {
                 this.character.isColliding(enemy) && this.character.isAboveGround() && !this.character.isHurt()
             ) {
                 enemy.isHit = true;
+                if (!world.character.mute) this.smashchicken_sound.play();
                 this.removeEnemy(enemy);
                 //console.log("CHICKEN CRUSHED", crushedChicken);
             }
@@ -195,7 +202,7 @@ class World {
             if (index > -1) {
                 this.level.enemies.splice(index, 1);
             }
-        }, 300);
+        }, 1500);
     }
 
 
@@ -239,8 +246,8 @@ class World {
      */
     addObjects(){
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.collectibleCoins); // ?
-        this.addObjectsToMap(this.level.collectibleBottles);// ?
+        this.addObjectsToMap(this.level.collectibleCoins);
+        this.addObjectsToMap(this.level.collectibleBottles);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
     }
