@@ -34,7 +34,7 @@ class ThrowableObject extends MovableObject {
 
     
     /**
-     * This function is called when an object is thrown.
+     * Called when an object is thrown.
      * The object will be thrown in the direction of the character and will be rotated.
      * After a certain time the object will splash.
      */

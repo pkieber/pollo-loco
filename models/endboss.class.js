@@ -69,7 +69,7 @@ class Endboss extends MovableObject {
 
 
     /**
-     * This function animates the endboss.
+     * Animates the endboss.
      */
     animateEndboss() {
         setStoppableInterval(() => {
@@ -94,7 +94,7 @@ class Endboss extends MovableObject {
     
 
     /**
-     * This function stops the game and shows the endscreen when the endboss is dead.
+     * Stops the game and shows the endscreen when the endboss is dead.
      */
     playEndbossDeadAnimation(){
         stopGame();

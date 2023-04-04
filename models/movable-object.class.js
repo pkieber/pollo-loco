@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject{
     energy = 100;
     lastHit = 0;
     /**
-     * Offset is used to adjust the collision detection variables.
+     * Used to adjust the collision detection variables.
      */
     offset = {
         top: 0,
@@ -23,9 +23,9 @@ class MovableObject extends DrawableObject{
     
 
     /**
-     * This function applies gravity to the character.
-     * This speedY variable is used to calculate the character's vertical position.
-     * The acceleration variable is used to calculate the character's vertical speed.
+     * Applies gravity to the character.
+     * SpeedY variable is used to calculate the character's vertical position.
+     * Acceleration variable is used to calculate the character's vertical speed.
      */
     applyGravity() {
         setInterval(() => {
@@ -38,7 +38,7 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function checks if the character is jumping or falling.
+     * Checks if the character is jumping or falling.
      * This.y < 120 is used to check if the character is on the ground.
      * @returns 
      */
@@ -52,7 +52,7 @@ class MovableObject extends DrawableObject{
     
 
     /**
-     * This function checks if a collision is happening on top, bottom, left or right of a movable object.
+     * Checks if a collision is happening on top, bottom, left or right of a movable object.
      * Offset is used to adjust the collision detection variables.
      * @param {*} mo 
      * @returns 
@@ -66,8 +66,8 @@ class MovableObject extends DrawableObject{
 
     
     /**
-     * This function is called when the character is hit by an enemy.
-     * It reduces the character's energy when it is hit by an enemy.
+     * Called when the character is hit by an enemy.
+     * Reduces the character's energy when it is hit by an enemy.
      */
     hit() {
         this.energy -= 5;
@@ -80,8 +80,8 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when the character is collecting coins.
-     * It adds to the coin counter if the character is collecting coins.
+     * Called when the character is collecting coins.
+     * Adds to the coin counter if the character is collecting coins.
      */
     collectCoin() {
         this.coin += 1;
@@ -95,8 +95,8 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when the character is collecting bottles.
-     * It adds to the bottle counter if the character is collecting bottles.
+     * Called when the character is collecting bottles.
+     * Adds to the bottle counter if the character is collecting bottles.
      */
     collectBottle() {
         this.bottle += 1;
@@ -110,8 +110,8 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when the character is hurt.
-     * The timepassed variable is used to adjust the time the character is hurt.
+     * Called when the character is hurt.
+     * Timepassed variable is used to adjust the time the character is hurt.
      * @returns 
      */
     isHurt() {
@@ -122,7 +122,7 @@ class MovableObject extends DrawableObject{
 
     
     /**
-     * This function is called when the character is dead.
+     * Called when the character is dead.
      * @returns 
      */
     isDead() {
@@ -131,7 +131,7 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when images are used to animate the character.
+     * Called when images are used to animate the character.
      * Cache is used to prevent the images from being loaded multiple times.
      * @param {*} images 
      */
@@ -144,7 +144,7 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when the character is moving right.
+     * Called when the character is moving right.
      */
     moveRight(){
         this.x += this.speed;
@@ -152,7 +152,7 @@ class MovableObject extends DrawableObject{
 
 
     /**
-     * This function is called when the character is moving left.
+     * Called when the character is moving left.
      */
     moveLeft(){
         this.x -= this.speed;
@@ -160,7 +160,7 @@ class MovableObject extends DrawableObject{
 
     
     /**
-     * This function is called when the character is jumping.
+     * Called when the character is jumping.
      */
     jump(){
         this.speedY = 30;

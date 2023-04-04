@@ -24,7 +24,7 @@ class StatusBarCoins extends DrawableObject {
 
 
     /**
-     * This method sets the percentage of the status bar for the coins.
+     * Sets the percentage of the status bar for the coins.
      * @param {*} percentage 
      */
     setPercentage(percentage) {
@@ -35,7 +35,7 @@ class StatusBarCoins extends DrawableObject {
 
 
     /**
-     * This method is used to determine the correct image index.
+     * Used to determine the correct image index.
      * @returns the index of the image that should be used.
      */
     resolveImageIndex() {

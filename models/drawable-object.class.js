@@ -9,7 +9,7 @@ class DrawableObject {
 
 
     /**
-     * This method loads an image from a path.
+     * Loads an image from a path.
      * @param {*} path 
      */
     loadImage(path){
@@ -19,7 +19,7 @@ class DrawableObject {
 
 
     /**
-     * This method draws the object on the canvas and catches errors.
+     * Draws the object on the canvas and catches errors.
      * The error is logged to the console if the image could not be loaded.
      * @param {*} ctx 
      */
@@ -34,7 +34,7 @@ class DrawableObject {
     
 
     /**
-     * This method draws the frame of the object to help with collision detection.
+     * Draws the frame of the object to help with collision detection.
      * Only if the object is an instance of Character, Chicken or Endboss, the frame is drawn.
      */
     /*
@@ -51,7 +51,7 @@ class DrawableObject {
     
 
     /**
-     * This method loads an array of images into the image cache.
+     * Loads an array of images into the image cache.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
      */
         loadImages(arr){

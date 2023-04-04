@@ -5,8 +5,8 @@ let intervalIds = [];
 
 
 /**
- * This function starts the game.
- * It hides the startscreen and shows the canvas.
+ * Starts the game.
+ * Hides the startscreen and shows the canvas.
  */
 function startGame() {
     initLevel();
@@ -22,7 +22,7 @@ function startGame() {
 
 
 /**
- * This function reloads the page.
+ * Reloads the page.
  */
 function restart() {
     location.reload();
@@ -30,7 +30,7 @@ function restart() {
 
 
 /**
- * This function stops all intervals.
+ * Stops all intervals.
  * @param {*} fn 
  * @param {*} time 
  */
@@ -41,7 +41,7 @@ function setStoppableInterval(fn, time) {
 
 
 /**
- * This function stops the game and clears the interval ids.
+ * Stops the game and clears the interval ids.
  */
 function stopGame() {
     intervalIds.forEach(clearInterval);
@@ -49,7 +49,7 @@ function stopGame() {
 
 
 /**
- * This function shows the "Winner"-endscreen.
+ * Shows the "Winner"-endscreen.
  * Icons or titles are replaced on-click.
  */
 function showEndscreenWin() {
@@ -65,7 +65,7 @@ function showEndscreenWin() {
 
 
 /**
- * This function shows the "Loser"-endscreen when the player loses.
+ * Shows the "Loser"-endscreen when the player loses.
  * Icons or titles are replaced on-click.
  */
 function showEndscreenLost() {
@@ -81,7 +81,7 @@ function showEndscreenLost() {
 
 
 /**
- * This function shows the instructions.
+ * Shows the instructions.
  */
 function showInstructions() {
     document.getElementById("overlayInstruction").style.display = "block";
@@ -89,7 +89,7 @@ function showInstructions() {
 
 
 /**
- * This function hides the instructions.
+ * Hides the instructions.
  */
 function hideInstructions() {
     document.getElementById("overlayInstruction").style.display = "none";
@@ -97,7 +97,7 @@ function hideInstructions() {
 
 
 /**
- * This function shows the intro story of the game.
+ * Shows the intro story of the game.
  */
 function showStory() {
     document.getElementById("overlayStory").style.display = "block";
@@ -105,7 +105,7 @@ function showStory() {
 
 
 /**
- * This function hides the intro story of the game.
+ * Hides the intro story of the game.
  */
 function hideStory() {
     document.getElementById("overlayStory").style.display = "none";
@@ -113,7 +113,7 @@ function hideStory() {
 
 
 /**
- * Function to advice user to switch to landscape mode.
+ * Advice user to switch to landscape mode.
  */
 function handleOrientationChange() {
     let landscapeMessage = document.getElementById("landscapeMessage");
@@ -128,7 +128,7 @@ function handleOrientationChange() {
 
 
 /**
- * This function hides the intro story of the game.
+ * Hides the intro story of the game.
  */
 function hideMessage() {
     document.getElementById("landscapeMessage").style.display = "none";
@@ -136,7 +136,7 @@ function hideMessage() {
 
 
 /**
- * This function makes the instructions overlay disappear when clicking outside of it.
+ * Makes the instructions overlay disappear when clicking outside of it.
  */
 window.addEventListener("click", function(event) {
     if (event.target == document.getElementById("overlayInstruction")) {
@@ -152,7 +152,7 @@ window.addEventListener("click", function(event) {
 
 
 /**
- * This function mutes the sound.
+ * Mutes the sound.
  */
 function soundOff() {
     if (!world.character.mute) {
@@ -164,7 +164,7 @@ function soundOff() {
 
 
 /**
- * This function unmutes the sound.
+ * Unmutes the sound.
  */
 function soundOn() {
     if (world.character.mute) {
@@ -176,7 +176,7 @@ function soundOn() {
 
 
 /**
- * This function opens the game in fullscreen mode.
+ * Opens the game in fullscreen mode.
  */
 function openFullscreen() {
     if (canvas.requestFullscreen) {
@@ -192,7 +192,7 @@ function openFullscreen() {
 
 
 /**
- * This function closes the game from fullscreen mode.
+ * Closes the game from fullscreen mode.
  */
 function closeFullscreen() {
     if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
@@ -210,7 +210,16 @@ function closeFullscreen() {
 
 
 /**
- * This function sets the event listeners (keydown) for the buttons in the panel.
+ * Shows a spinning wheel when page is loading. 
+ */
+window.addEventListener('load', function() {
+    var loader = document.getElementById('loading-overlay');
+    loader.style.display = 'none';
+});
+
+
+/**
+ * Sets the event listeners (keydown) for the buttons in the panel.
  */
 window.addEventListener('keydown', (e) => {
     if(e.keyCode == 39){
@@ -236,7 +245,7 @@ window.addEventListener('keydown', (e) => {
 
 
 /**
- * This function sets the event listeners (keyup) for the buttons in the panel.
+ * Sets the event listeners (keyup) for the buttons in the panel.
  */
 window.addEventListener('keyup', (e) => {
     if(e.keyCode == 39){
@@ -262,7 +271,7 @@ window.addEventListener('keyup', (e) => {
 
 
 /**
- * This function sets the event listeners (touchstart/touchend) for the mobile control panel.
+ * Sets the event listeners (touchstart/touchend) for the mobile control panel.
  */
 function btnPanelPressEvents() {
     document.getElementById('btnLeft').addEventListener('touchstart', (e) => {

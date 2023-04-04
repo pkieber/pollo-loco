@@ -12,7 +12,7 @@ class Cloud extends MovableObject{
 
 
     /**
-     * This function animates the clouds.
+     * Animates the clouds.
      */
     animate(){
         setStoppableInterval(() => {

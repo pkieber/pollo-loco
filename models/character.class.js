@@ -81,7 +81,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function animates the character.
+     * Animates the character.
      */
     animate(){
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
@@ -90,7 +90,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function moves the character in the game based on the key pressed.
+     * Moves the character in the game based on the key pressed.
      */
     moveCharacter(){
         this.walking_sound.pause();
@@ -118,7 +118,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function plays the correct animation of the character based on the condition.
+     * Plays the correct animation of the character based on the condition.
      */
     playCharacterAnimation(){
         if (this.isDead()){
@@ -137,7 +137,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function is called when character is dead.
+     * Called when character is dead.
      */
     playCharacterDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
@@ -151,7 +151,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function checks if the character can move right.
+     * Checks if the character can move right.
      * @returns 
      */
     canMoveRight() {
@@ -160,7 +160,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function checks if the character can move left. 
+     * Checks if the character can move left. 
      * @returns 
      */
     canMoveLeft() {
@@ -169,7 +169,7 @@ class Character extends MovableObject{
 
 
     /**
-     * This function checks if the character can jump.
+     * Checks if the character can jump.
      * @returns
      */
     canJump() {

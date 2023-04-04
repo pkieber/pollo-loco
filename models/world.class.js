@@ -30,7 +30,7 @@ class World {
 
 
     /**
-     * This function sets the world for the character.
+     * Sets the world for the character.
      */
     setWorld(){
         this.character.world = this;
@@ -38,7 +38,7 @@ class World {
 
 
     /**
-     * This function checks whether objects are colliding with each other.
+     * Checks whether objects are colliding with each other.
      * If objects are colliding, further actions can be performed.
      */
     run() {
@@ -57,7 +57,7 @@ class World {
 
 
     /**
-     * This function checks if objects are thrown.
+     * Checks if objects are thrown.
      * If bottles are thrown, they are pushed into the array.
      */    
     checkThrownObjects() {
@@ -70,18 +70,18 @@ class World {
 
 
     /**
-     * This function is called when the character throws a bottle.
+     * Called when the character throws a bottle.
      * The bottle count is set to minus 1.
      */
     bottleCount() {
         this.character.bottle -= 1;
-        console.log('Collision with Character, bottles', this.character.bottle);
+        //console.log('Collision with Character, bottles', this.character.bottle);
         this.statusBarBottles.setPercentage(this.character.bottle);
     }
 
 
     /**
-     * This function checks if character and enemies are colliding.
+     * Checks if character and enemies are colliding.
      * If so, the statusbar is updated.
      */
     checkCollisions() {
@@ -100,7 +100,7 @@ class World {
 
 
     /**
-     * This function checks if character and endboss are colliding.
+     * Checks if character and endboss are colliding.
      * If so, the statusbar is updated.
      */
     checkCollisionWithEndboss() {
@@ -116,7 +116,7 @@ class World {
 
 
     /**
-     * This function checks if character and bottles are colliding to collect them.
+     * Checks if character and bottles are colliding to collect them.
      * If so, the statusbar is updated.
      */
     checkCollisionWithBottles() {
@@ -132,7 +132,7 @@ class World {
 
 
     /**
-     * This function checks if character and coins are colliding to collect them.
+     * Checks if character and coins are colliding to collect them.
      * If so, the statusbar is updated.
      */
     checkCollisionWithCoins() {
@@ -148,7 +148,7 @@ class World {
 
 
     /**
-     * This function checks if throwable objects (bottle) and endboss are colliding after bottle is thrown.
+     * Checks if throwable objects (bottle) and endboss are colliding after bottle is thrown.
      * If so, the statusbar is updated.
      */
     checkIfEndbossHitByBottle() {
@@ -169,7 +169,7 @@ class World {
 
 
     /**
-     * This function checks if character and chicken/small chicken are colliding after character jumps on them.
+     * Checks if character and chicken/small chicken are colliding after character jumps on them.
      */
     checkJumpOnEnemy() {
         for (let i = 0; i < this.level.enemies.length; i++) {
@@ -186,7 +186,7 @@ class World {
 
 
     /**
-     * This function removes the enemy from the array after being killed.
+     * Removes the enemy from the array after being killed.
      * @param {*} enemy 
      */
     removeEnemy(enemy) {
@@ -200,7 +200,7 @@ class World {
 
 
     /**
-     * This function draws the world and all objects in it like character, enemies, clouds, etc.
+     * Draws the world and all objects in it like character, enemies, clouds, etc.
      * ctx.clear() is used to clear the canvas before drawing the next frame.
      * ctx.translate() is used to move the camera with the character on the x-axis.
      * Draw() is called again with requestAnimationFrame() to draw the next frame.
@@ -224,7 +224,7 @@ class World {
 
 
     /**
-     * This function draws status bars on the map. 
+     * Draws status bars on the map. 
      */
     addStatusBars(){
         this.addToMap(this.statusBar);   
@@ -235,7 +235,7 @@ class World {
 
 
     /**
-     * This function draws objects on the map. 
+     * Draws objects on the map. 
      */
     addObjects(){
         this.addObjectsToMap(this.level.clouds);
@@ -247,7 +247,7 @@ class World {
 
 
     /**
-     * This function adds objects to the map.
+     * Adds objects to the map.
      * @param {*} objects 
      */
     addObjectsToMap(objects){
@@ -258,7 +258,7 @@ class World {
 
 
     /**
-     * This function adds movable objects to the map.
+     * Adds movable objects to the map.
      * @param {*} mo 
      */
     addToMap(mo) { 
@@ -274,7 +274,7 @@ class World {
 
 
     /**
-     * This function flips the image horizontally.
+     * Flips the image horizontally.
      * ctx.save() and ctx.restore() are used to save and restore the context if image is flipped.
      * ctx.thanslate() is used to move the context and ctx.scale() is used to flip the context on the x-axis.
      * @param {*} mo 
@@ -288,7 +288,7 @@ class World {
 
 
     /**
-     * This function flips the image back to normal.
+     * Flips the image back to normal.
      * @param {*} mo 
      */
     flipImageBack(mo){

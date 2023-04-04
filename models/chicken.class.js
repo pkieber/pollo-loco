@@ -32,7 +32,7 @@ class Chicken extends MovableObject {
 
 
     /**
-     * This function animates the chicken.
+     * Animates the chicken.
      */
     animate(){
         setStoppableInterval(() => this.moveLeft(), 1000 / 60);
@@ -41,7 +41,7 @@ class Chicken extends MovableObject {
 
 
     /**
-     * This function plays the chicken animation depending on the state of the chicken.
+     * Plays the chicken animation depending on the state of the chicken.
      */
     playChickenAnimation() {
         if (!this.isHit) this.playAnimation(this.IMAGES_WALKING);

@@ -23,7 +23,7 @@ class statusBarEndboss extends DrawableObject {
 
 
     /**
-     * This method sets the percentage of the health bar for the endboss.
+     * Sets the percentage of the health bar for the endboss.
      * @param {*} percentage 
      */
     setPercentage(percentage) {
@@ -34,7 +34,7 @@ class statusBarEndboss extends DrawableObject {
 
 
     /**
-     * This method is used to determine the correct image index.
+     * Used to determine the correct image index.
      * @returns the index of the image that should be used.
      */
     resolveImageIndex() {
