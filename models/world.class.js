@@ -190,10 +190,11 @@ class World {
                 this.character.isColliding(enemy) && !this.character.isHurt() &&
                 this.character.isAboveGround() && this.character.speedY < 0
             ) {
-                enemy.isHit = true;
-                if (!world.character.mute) this.smashchicken_sound.play();
-                this.removeEnemy(enemy);
-                //console.log("CHICKEN CRUSHED", crushedChicken);
+                if (!enemy.isHit) { //check if the enemy has not been hit before
+                    enemy.isHit = true;
+                    if (!world.character.mute) this.smashchicken_sound.play();
+                }
+                this.removeEnemy(enemy); //console.log("CHICKEN CRUSHED", enemy);
             }
         }
     }
