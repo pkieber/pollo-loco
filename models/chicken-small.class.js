@@ -48,7 +48,7 @@ class SmallChicken extends MovableObject {
             else {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
-                this.y = 430;
+                this.y = 380;
             }
     }        
 }

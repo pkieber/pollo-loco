@@ -8,10 +8,10 @@ class CollectibleCoin extends MovableObject {
     height = 120;
     width = 120;
     offset = {
-        top: 0,
-        left: 20,
-        right: 20,
-        bottom: 0
+        top: 70,
+        left: 50,
+        right: 50,
+        bottom: 70
     };
 
 

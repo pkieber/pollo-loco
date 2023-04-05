@@ -6,8 +6,8 @@ class Chicken extends MovableObject {
     offset = {
         top: -10,
         bottom: 0,
-        left: 15,
-        right: 15 
+        left: 30,
+        right: 30 
     }
 
 
@@ -48,7 +48,7 @@ class Chicken extends MovableObject {
             else {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
-                this.y = 410;
+                this.y = 360;
             }       
         }
 }

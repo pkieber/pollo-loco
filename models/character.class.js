@@ -140,6 +140,7 @@ class Character extends MovableObject{
     playCharacterDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
             if (!this.mute) this.death_sound.play();
+            setInterval(() => this.y++, 20);
             setTimeout(() => {
                 stopGame();
                 closeFullscreen();

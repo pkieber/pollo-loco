@@ -61,7 +61,7 @@
         <div class="game-button-container">
             <button id="instruction" title="How to" onclick="showInstructions()"><img class="icons" src="./img/gamecontroller.svg"></button>
             <button id="story" title="Story" onclick="showStory()"><img class="icons" src="./img/quote.bubble.svg"></button>
-            <div id="screenBtn" class="d-none">
+            <div id="screenBtn" class="d-none d-flex">
                 <button class="mobile-none" id="fullscreen" title="Toggle Fullscreen" onclick="openFullscreen()"><img class="icons" src="./img/toggle_fullscreen.svg"></button>
                 <button id = "mute" title="Sound Off" onclick="soundOff()"><img class="icons" src="./img/speaker.slash.fill.svg"></button>
                 <button id = "unmute" title="Sound On" onclick="soundOn()" class="d-none"><img class="icons" src="./img/speaker.fill.svg"></button>
@@ -69,11 +69,11 @@
             <button id= "startBtn" title="Start Game" onclick="startGame()"><img class="icons" src="./img/play.svg"></button>
         </div>
         <div id="controller" class="controller-button-container">
-            <div class="panel">
+            <div class="panel d-flex">
                 <button id="btnLeft" title="Move Left"><img class="icons" src="./img/arrow.left.svg"></button>
                 <button id="btnRight" title="Move Right"><img class="icons" src="./img/arrow.right.svg"></button>
             </div>
-            <div class="panel">
+            <div class="panel d-flex">
                 <button id="btnJump" title="Jump"><img class="icons" src="./img/arrow.up.svg"></button>
                 <button id="btnThrow" title="Throw"><img class="icons" src="./img/arrow.turn.up.right.svg"></button>
             </div>

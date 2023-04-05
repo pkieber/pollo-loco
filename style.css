@@ -113,6 +113,18 @@ canvas {
     width: 100%;
 }
 
+.controller-button-container {
+    display: none;
+    z-index: 999;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.panel {
+    gap: 10px;
+}
+
 button {
     cursor: pointer;
     border: none;
@@ -123,10 +135,17 @@ button {
     background-color: rgb(246, 206, 73);
     opacity: 0.9;
     transition: all 225ms ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button:hover {
     background-color: rgb(249, 189, 0);
+}
+
+.d-flex {
+    display: flex;
 }
 
 .d-none {
@@ -137,10 +156,6 @@ button:hover {
     position: relative;
     justify-content: center;
     align-items: center;
-}
-
-.controller-button-container {
-    display: none;
 }
 
 #landscapeMessage {
@@ -196,6 +211,8 @@ button:hover {
     body {
         background-position: unset;
         background-size: unset;
+        margin: 0;
+        overflow: hidden;
     }
 
     .controller-button-container {
@@ -227,7 +244,7 @@ button:hover {
 /* Smartphones ------- */
 @media only screen and (max-width: 720px) {
     h1 {
-        font-size: 48px;
+        display: none;
     }
 
     canvas {
@@ -251,7 +268,7 @@ button:hover {
 
 @media only screen and (max-height: 480px) {
     h1 {
-        font-size: 48px;
+        display: none;
     }
     
     canvas {

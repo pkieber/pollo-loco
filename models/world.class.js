@@ -65,12 +65,16 @@ class World {
     /**
      * Checks if objects are thrown.
      * If bottles are thrown, they are pushed into the array.
+     * Only one bottle will be thrown each time the "D" key is pressed.
      */    
     checkThrownObjects() {
-        if(this.keyboard.D && this.character.bottle > 0) {
+        if (this.keyboard.D && this.character.bottle > 0 && !this.bottleThrown) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             this.bottleCount();
+            this.bottleThrown = true;
+        } else if (!this.keyboard.D) {
+            this.bottleThrown = false;
         }
     }
 
@@ -92,7 +96,7 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach ((enemy) => {
-            if(this.character.isColliding(enemy) && !this.character.isAboveGround() && !this.characterIsHurt) { 
+            if(this.character.isColliding(enemy) && !this.character.isAboveGround() && !this.characterIsHurt && !enemy.isHit) { 
                 this.character.hit();
                 this.characterIsHurt = true;
                 this.statusBar.setPercentage(this.character.energy);
@@ -110,7 +114,7 @@ class World {
      * If so, the statusbar is updated.
      */
     checkCollisionWithEndboss() {
-        if (this.character.isColliding(this.endboss)) {
+        if (this.character.isColliding(this.endboss) && !this.endboss.isDead()) {
             this.character.hit();
             this.characterIsHurt = true;
             this.statusBar.setPercentage(this.character.energy);
@@ -176,12 +180,15 @@ class World {
 
     /**
      * Checks if character and chicken/small chicken are colliding after character jumps on them.
+     * Character can only kill chicken while falling down on it.
+     * When enemy is dead, it cannot hurt character anymore.
      */
     checkJumpOnEnemy() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             const enemy = this.level.enemies[i];
             if (
-                this.character.isColliding(enemy) && this.character.isAboveGround() && !this.character.isHurt()
+                this.character.isColliding(enemy) && !this.character.isHurt() &&
+                this.character.isAboveGround() && this.character.speedY < 0
             ) {
                 enemy.isHit = true;
                 if (!world.character.mute) this.smashchicken_sound.play();
