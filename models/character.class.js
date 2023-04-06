@@ -63,7 +63,6 @@ class Character extends MovableObject{
     jumping_sound = new Audio('audio/jump.mp3');
     pain_sound = new Audio('audio/pain.mp3');
     death_sound = new Audio('audio/character_death.mp3');
-    background_sound = new Audio('audio/background.mp3');
 
 
     constructor(){
@@ -92,11 +91,6 @@ class Character extends MovableObject{
      */
     moveCharacter(){
         this.walking_sound.pause();
-        if (!this.mute) {
-            this.background_sound.play();  
-        } else {
-            this.background_sound.pause();
-        } 
         if(this.canMoveRight()){ 
             this.moveRight();
             this.otherDirection = false;

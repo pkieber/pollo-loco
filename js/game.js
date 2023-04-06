@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
+let background_sound = new Audio('audio/background.mp3');
 
 
 /**
@@ -17,6 +18,7 @@ function startGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     btnPanelPressEvents();
+    background_sound.play();
     // console.log('My Character is', world.character);}
 }
 
@@ -45,6 +47,8 @@ function setStoppableInterval(fn, time) {
  */
 function stopGame() {
     intervalIds.forEach(clearInterval);
+    background_sound.pause();
+    background_sound.currentTime = 0;
 }
 
 
@@ -156,9 +160,11 @@ window.addEventListener("click", function(event) {
  */
 function soundOff() {
     if (!world.character.mute) {
-    document.getElementById("mute").classList.add('d-none');
-    document.getElementById("unmute").classList.remove('d-none');
-    world.character.mute = true;
+        document.getElementById("mute").classList.add('d-none');
+        document.getElementById("unmute").classList.remove('d-none');
+        world.character.mute = true;
+        background_sound.muted = true; // mute background_sound
+        background_sound.currentTime = 0; // reset background_sound
     } 
 }
 
@@ -168,9 +174,10 @@ function soundOff() {
  */
 function soundOn() {
     if (world.character.mute) {
-    document.getElementById("mute").classList.remove('d-none');
-    document.getElementById("unmute").classList.add('d-none');
-    world.character.mute = false;
+        document.getElementById("mute").classList.remove('d-none');
+        document.getElementById("unmute").classList.add('d-none');
+        world.character.mute = false;
+        background_sound.muted = false; // unmute background_sound
     }   
 } 
 
