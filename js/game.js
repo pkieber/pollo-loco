@@ -117,29 +117,6 @@ function hideStory() {
 
 
 /**
- * Advice user to switch to landscape mode.
- */
-function handleOrientationChange() {
-    let landscapeMessage = document.getElementById("landscapeMessage");
-    if (window.innerHeight > window.innerWidth) {
-        // Show the message if in portrait mode
-        landscapeMessage.style.display = "block";
-    } else {
-        // Hide the message if in landscape mode
-        landscapeMessage.style.display = "none";
-    }
-}
-
-
-/**
- * Hides the intro story of the game.
- */
-function hideMessage() {
-    document.getElementById("landscapeMessage").style.display = "none";
-}
-
-
-/**
  * Makes the instructions overlay disappear when clicking outside of it.
  */
 window.addEventListener("click", function(event) {

@@ -114,6 +114,7 @@ class Character extends MovableObject{
      */
     playCharacterAnimation(){
         if (this.isDead()){
+            this.speed = 0;
             this.playCharacterDeadAnimation();
         } else if (this.isHurt()){ 
                 this.playAnimation(this.IMAGES_HURT);
