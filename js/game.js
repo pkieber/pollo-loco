@@ -6,15 +6,20 @@ let background_sound = new Audio('audio/background.mp3');
 
 
 /**
- * Starts the game.
+ * Initiates the game.
  * Hides the startscreen and shows the canvas.
  */
+async function initGame() {
+    await initLevel();
+    await startGame();
+    hideStartScreen();
+}
+
+
+/**
+ * Starts the game, loads the world and plays the background sound loop.
+ */
 function startGame() {
-    initLevel();
-    document.getElementById('startscreen').classList.add('d-none');
-    document.getElementById('canvas').classList.remove('d-none');
-    document.getElementById('startBtn').classList.add('d-none');
-    document.getElementById('screenBtn').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     btnPanelPressEvents();
@@ -24,10 +29,33 @@ function startGame() {
 
 
 /**
- * Reloads the page.
+ * Startscreen will be removed and screen buttons added/removed.
+ */
+function hideStartScreen() {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('startBtn').classList.add('d-none');
+    document.getElementById('screenBtn').classList.remove('d-none');
+}
+
+
+/**
+ * Restarts the game and adds sound.
  */
 function restart() {
-    location.reload();
+    hideEndScreen();
+    initGame();
+    soundOn();
+}
+
+
+/**
+ * Endscreen will be removed and screen buttons replaced/added. 
+ */
+function hideEndScreen(){
+    document.getElementById('endscreen').classList.add('d-none');
+    document.getElementById('endscreenWin').classList.add('d-none');
+    document.getElementById('endscreenLost').classList.add('d-none');
 }
 
 
@@ -43,7 +71,7 @@ function setStoppableInterval(fn, time) {
 
 
 /**
- * Stops the game and clears the interval ids.
+ * Stops the game by clearing the intervals and resetting the background sound loop.
  */
 function stopGame() {
     intervalIds.forEach(clearInterval);

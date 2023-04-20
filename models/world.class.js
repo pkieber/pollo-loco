@@ -48,12 +48,12 @@ class World {
      * If objects are colliding, further actions can be performed.
      */
     run() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisionWithCoins();
             this.checkCollisionWithBottles();
             this.checkJumpOnEnemy();
         }, 50)
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisions();
             this.checkCollisionWithEndboss();
             this.checkThrownObjects();

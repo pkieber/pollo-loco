@@ -28,7 +28,7 @@ class MovableObject extends DrawableObject{
      * Acceleration variable is used to calculate the character's vertical speed.
      */
     applyGravity() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
