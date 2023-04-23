@@ -24,7 +24,6 @@ function startGame() {
     world = new World(canvas, keyboard);
     btnPanelPressEvents();
     background_sound.play();
-    // console.log('My Character is', world.character);}
 }
 
 
